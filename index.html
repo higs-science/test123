@@ -1,1 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DECA Front Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            cursor: pointer;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 25px;
+            position: relative;
+        }
+
+        .nav-button {
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-button:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Dropdown menus */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px 0;
+            display: none;
+            z-index: 1001;
+            min-width: 200px;
+        }
+
+        .nav-button:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown-button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-button:hover {
+            background: #f0f0f0;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .start-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .start-button:hover {
+            background: #5a6fd8;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* About Section */
+        .about {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 100px;
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            width: 100%;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .accordion {
+            background-color: #f1f1f1;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .accordion:hover {
+            background-color: #ddd;
+        }
+
+        .accordion:after {
+            content: '\002B';
+            color: #777;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .panel-content {
+            padding: 15px 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .about-image {
+            flex: 1;
+            height: 500px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact {
+            height: 100vh;
+            padding: 100px 100px 50px;
+            background: white;
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .contact-sections {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .social-media, .other {
+            flex: 1;
+        }
+
+        .social-media h3, .other h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .instagram-link {
+            display: inline-block;
+            background: #E4405F;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(228, 64, 95, 0.3);
+        }
+
+        .instagram-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(228, 64, 95, 0.4);
+        }
+
+        .instagram-link i {
+            margin-right: 10px;
+        }
+
+        .logo-links {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .logo-link {
+            width: 80px;
+            height: 80px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .copy-link {
+            background: #764ba2;
+            cursor: pointer;
+        }
+
+        /* Quiz Page */
+        .quiz-page {
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .quiz-page.active {
+            display: flex;
+        }
+
+        .quiz-content h1 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+        }
+
+        .quiz-buttons {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .quiz-button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            min-width: 150px;
+        }
+
+        .yes-button {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .no-button {
+            background: #f44336;
+            color: white;
+        }
+
+        .nav-button-style {
+            background: #667eea;
+            color: white;
+        }
+
+        .quiz-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Events Page */
+        .events-page {
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .events-page.active {
+            display: flex;
+        }
+
+        .events-content h1 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+        }
+
+        .events-buttons {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .event-button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            min-width: 200px;
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .event-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Color-coded buttons */
+        .yellow-button {
+            background: #FFD700;
+            color: #333;
+        }
+
+        .grey-button {
+            background: #808080;
+            color: white;
+        }
+
+        .dark-green-button {
+            background: #006400;
+            color: white;
+        }
+
+        .blue-button {
+            background: #1E90FF;
+            color: white;
+        }
+
+        .red-button {
+            background: #DC143C;
+            color: white;
+        }
+
+        .light-green-button {
+            background: #90EE90;
+            color: #333;
+        }
+
+        /* Content Pages */
+        .content-page {
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .content-page.active {
+            display: flex;
+        }
+
+        .content-page h1 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+        }
+
+        .content-page p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            color: white;
+        }
+
+        /* Video container */
+        .video-container {
+            position: relative;
+            width: 80%;
+            padding-bottom: 45%; /* 16:9 Aspect Ratio */
+            height: 0;
+            margin: 20px auto;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        /* Back Button */
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            display: none;
+        }
+
+        .back-button:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-20px) translateX(-50%);}
+            60% {transform: translateY(-10px) translateX(-50%);}
+        }
+
+        .scroll-text {
+            color: white;
+            margin-bottom: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .scroll-arrow {
+            width: 30px;
+            height: 30px;
+            border: 2px solid white;
+            border-left: none;
+            border-top: none;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+
+        .up-arrow {
+            transform: rotate(45deg);
+        }
+
+        .down-arrow {
+            transform: rotate(225deg);
+        }
+
+        /* Calendar */
+        .calendar-page {
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .calendar-page.active {
+            display: flex;
+        }
+
+        .calendar-container {
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            color: #333;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-title {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .edit-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .edit-button:hover {
+            background: #5a6fd8;
+        }
+
+        #calendar {
+            margin: 20px 0;
+        }
+
+        .fc .fc-toolbar-title {
+            font-size: 1.5rem;
+        }
+
+        .fc .fc-button {
+            background: #667eea;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+        }
+
+        .fc .fc-button:hover {
+            background: #5a6fd8;
+        }
+
+        .fc .fc-button-primary:not(:disabled).fc-button-active {
+            background: #5a6fd8;
+        }
+
+        .slides-section {
+            margin-top: 50px;
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        .slides-title {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .slides-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 200px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form styles */
+        .form-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2,
+        .form-container p {
+            color: black;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Password form */
+        .password-form {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .password-form h2,
+        .password-form p {
+            color: black;
+        }
+
+        /* Resources Page */
+        .resources-page {
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .resources-page.active {
+            display: flex;
+        }
+
+        .resources-content h1 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+        }
+
+        .resources-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <img src="https://placehold.co/120x40/667eea/ffffff?text=LOGO" alt="DECA Logo" class="logo" id="logo">
+        <div class="nav-buttons">
+            <div class="nav-button" id="rolePlayNav">
+                RolePlay
+                <div class="dropdown" id="roleplayDropdown">
+                    <button class="dropdown-button" id="rolePlayWhatBtn">What?</button>
+                    <button class="dropdown-button" id="rolePlayExampleBtn">Example</button>
+                    <button class="dropdown-button" id="rolePlayResourcesBtn">Resources</button>
+                </div>
+            </div>
+            <div class="nav-button" id="writtenNav">
+                Written
+                <div class="dropdown" id="writtenDropdown">
+                    <button class="dropdown-button" id="writtenWhatBtn">What?</button>
+                    <button class="dropdown-button" id="writtenExampleBtn">Example</button>
+                    <button class="dropdown-button" id="writtenResourcesBtn">Resources</button>
+                </div>
+            </div>
+            <div class="nav-button" id="otherNav">
+                Other
+                <div class="dropdown" id="otherDropdown">
+                    <a href="https://www.deca.org/compete/stock-market-game" target="_blank" class="dropdown-button dark-green-button">Stock Market Game</a>
+                    <button class="dropdown-button" id="virtualBusinessBtn">Virtual Business Challenge</button>
+                </div>
+            </div>
+            <div class="nav-button" id="eventsNav">
+                Events
+                <div class="dropdown" id="eventsDropdown">
+                    <button class="dropdown-button" id="calendarBtn">Calendar</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="homeSection">
+        <h1>DECA</h1>
+        <p>Developing the next generation of marketing and business leaders</p>
+        <button class="start-button" id="startButton">Start</button>
+        <div class="scroll-indicator">
+            <div class="scroll-text" id="keepScrolling">Keep scrolling</div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>About</h2>
+                <button class="accordion" id="beTheOneBtn">Be the One!</button>
+                <div class="panel" id="beTheOnePanel">
+                    <div class="panel-content">
+                        DECA is more than competitions, blazers and medallions. Joining DECA is the first step you can take towards achieving your goals and realizing your greatest potential. Your membership in DECA provides you the opportunity to participate in DECA's high school programs at the local, chartered association and international levels.
+                    </div>
+                </div>
+                <button class="accordion" id="earnGlassBtn">Earn the DECA Glass!</button>
+                <div class="panel" id="earnGlassPanel">
+                    <div class="panel-content">
+                        Put your classroom learning to the test by participating in DECA's Competitive Events Program. Choose a competitive event that best fits your career interest and skills. Demonstrate your knowledge of important career content, as well as your creativity, problem solving and presentation skills to a business professional. The potential to earn travel opportunities, recognition, scholarships and even DECA Glass for learning classroom content makes it all that more motivating. With a combination of nearly 60 role-play, prepared and online events, DECA offers a competitive event for every course and every member.
+                    </div>
+                </div>
+                <button class="accordion" id="becomeLeaderBtn">Become an Emerging Leader!</button>
+                <div class="panel" id="becomeLeaderPanel">
+                    <div class="panel-content">
+                        Learn how to provide effective leadership through goal setting, consensus building and project implementation, while demonstrating critical thinking and problem solving, communication and collaboration, and creativity and innovation.
+                    </div>
+                </div>
+                <p class="scroll-text" id="upText">Are you ready to join DECA? ⬆️</p>
+                <p class="scroll-text" id="downText">Need Help? ⬇️</p>
+            </div>
+            <div class="about-image">
+                Vertical Image Space
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-sections">
+            <div class="social-media">
+                <h3>Social Media</h3>
+                <a href="https://www.instagram.com/deca_afhs/" target="_blank" class="instagram-link">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+            </div>
+            <div class="other">
+                <h3>Other</h3>
+                <div class="logo-links">
+                    <a href="" target="_blank" class="logo-link">Logo 1</a>
+                    <a href="#" class="logo-link copy-link" id="logo2">Logo 2</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Page -->
+    <div class="quiz-page" id="quizPage">
+        <div class="quiz-content" id="quizContent">
+            <!-- Content will be dynamically updated -->
+        </div>
+    </div>
+
+    <!-- Events Page -->
+    <div class="events-page" id="eventsPage">
+        <div class="events-content">
+            <h1>Events Page</h1>
+            <p>You have an event! Please select your event type:</p>
+            <div class="events-buttons">
+                <button class="event-button" id="rolePlayButton">RolePlay</button>
+                <button class="event-button" id="writtenButton">Written</button>
+                <button class="event-button" id="otherButton">Other</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calendar Page -->
+    <div class="calendar-page" id="calendarPage">
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <div class="calendar-title">Events Calendar</div>
+                <button class="edit-button" id="editCalendarButton">Edit</button>
+            </div>
+            <div id="calendar"></div>
+            <div class="slides-section">
+                <h2 class="slides-title">Slides From Past Meetings</h2>
+                <div class="slides-box">
+                    <p>Upload slides here...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Form -->
+    <div class="content-page" id="passwordFormPage">
+        <div class="password-form">
+            <h2>Enter Password to Edit Calendar</h2>
+            <input type="password" class="form-input" id="passwordInput" placeholder="Enter password">
+            <div class="form-buttons">
+                <button class="quiz-button nav-button-style" id="submitPassword">Submit</button>
+                <button class="quiz-button no-button" id="cancelPassword">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Not DECA Member Page -->
+    <div class="content-page" id="notDecaMemberPage">
+        <div class="form-container">
+            <h2>You are not a DECA member</h2>
+            <p>Please complete the following steps:</p>
+            <div class="form-buttons">
+                <button class="quiz-button nav-button-style" onclick="window.open('https://forms.google.com', '_blank')">Google Form</button>
+                <button class="quiz-button" id="doneFormButton">I have done this</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gilbert's Room Page -->
+    <div class="content-page" id="gilbertRoomPage">
+        <div class="form-container">
+            <h2>Go to Gilbert's Room and Ask for Papers</h2>
+            <p>Form 1 | Form 2</p>
+            <button class="quiz-button nav-button-style" id="okayButton">Okay</button>
+        </div>
+    </div>
+
+    <!-- Resources Page -->
+    <div class="resources-page" id="resourcesPage">
+        <div class="resources-content">
+            <h1>Resources Page</h1>
+            <p>This is where resources would be displayed.</p>
+        </div>
+    </div>
+
+    <!-- Content Pages -->
+    <div class="content-page" id="principlesPage">
+        <div>
+            <h1>Principles Events Page</h1>
+            <div class="events-buttons">
+                <a href="https://www.deca.org/compete/principles-of-business-management-and-administration" target="_blank" class="event-button yellow-button">Principles of Business Management and Administration</a>
+                <a href="https://www.deca.org/compete/principles-of-entrepreneurship" target="_blank" class="event-button grey-button">Principles of Entrepreneurship</a>
+                <a href="https://www.deca.org/compete/principles-of-finance" target="_blank" class="event-button dark-green-button">Principles of Finance</a>
+                <a href="https://www.deca.org/compete/principles-of-hospitality" target="_blank" class="event-button blue-button">Principles of Hospitality and Tourism</a>
+                <a href="https://www.deca.org/compete/principles-of-marketing" target="_blank" class="event-button red-button">Principles of Marketing</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-page" id="individualRoleplayPage">
+        <div>
+            <h1>Individual Roleplay Page</h1>
+            <div class="events-buttons">
+                <a href="https://www.deca.org/compete/accounting-applications-series" target="_blank" class="event-button dark-green-button">Accounting Applications Series</a>
+                <a href="https://www.deca.org/compete/business-finance-series" target="_blank" class="event-button dark-green-button">Business Finance Series</a>
+                <a href="https://www.deca.org/compete/entrepreneurship-series" target="_blank" class="event-button grey-button">Entrepreneurship Series</a>
+                <a href="https://www.deca.org/compete/human-resources-management-series" target="_blank" class="event-button yellow-button">Human Resources Management Series</a>
+                <a href="https://www.deca.org/compete/hotel-and-lodging-management-series" target="_blank" class="event-button blue-button">Hotel and Lodging Management Series</a>
+                <a href="https://www.deca.org/compete/quick-serve-restaurant-management-series" target="_blank" class="event-button blue-button">Quick Serve Restaurant Management Series</a>
+                <a href="https://www.deca.org/compete/restaurant-and-food-service-management-series" target="_blank" class="event-button blue-button">Restaurant and Food Service Management Series</a>
+                <a href="https://www.deca.org/compete/apparel-and-accessories-marketing-series" target="_blank" class="event-button red-button">Apparel and Accessories Marketing Series</a>
+                <a href="https://www.deca.org/compete/automotive-services-marketing-series" target="_blank" class="event-button red-button">Automotive Services Marketing Series</a>
+                <a href="https://www.deca.org/compete/business-services-marketing-series" target="_blank" class="event-button red-button">Business Services Marketing Series</a>
+                <a href="https://www.deca.org/compete/food-marketing-series" target="_blank" class="event-button red-button">Food Marketing Series</a>
+                <a href="https://www.deca.org/compete/marketing-communications-series" target="_blank" class="event-button red-button">Marketing Communications Series</a>
+                <a href="https://www.deca.org/compete/retail-merchandising-series" target="_blank" class="event-button red-button">Retail Merchandising Series</a>
+                <a href="https://www.deca.org/compete/sports-and-entertainment-marketing-series" target="_blank" class="event-button red-button">Sports and Entertainment Marketing Series</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-page" id="teamDecisionPage">
+        <div>
+            <h1>Team Decision Making Page</h1>
+            <div class="events-buttons">
+                <a href="https://www.deca.org/compete/financial-services-team-decision-making" target="_blank" class="event-button dark-green-button">Financial Services Team Decision Making</a>
+                <a href="https://www.deca.org/compete/entrepreneurship-team-decision-making" target="_blank" class="event-button grey-button">Entrepreneurship Team Decision Making</a>
+                <a href="https://www.deca.org/compete/business-law-and-ethics-team-decision-making" target="_blank" class="event-button yellow-button">Business Law and Ethics Team Decision Making</a>
+                <a href="https://www.deca.org/compete/hospitality-services-team-decision-making" target="_blank" class="event-button blue-button">Hospitality Services Team Decision Making</a>
+                <a href="https://www.deca.org/compete/travel-and-tourism-team-decision-making" target="_blank" class="event-button blue-button">Travel and Tourism Team Decision Making</a>
+                <a href="https://www.deca.org/compete/buying-and-merchandising-team-decision-making" target="_blank" class="event-button red-button">Buying and Merchandising Team Decision Making</a>
+                <a href="https://www.deca.org/compete/marketing-management-team-decision-making" target="_blank" class="event-button red-button">Marketing Management Team Decision Making</a>
+                <a href="https://www.deca.org/compete/sports-and-entertainment-marketing-team-decision-making" target="_blank" class="event-button red-button">Sports and Entertainment Marketing Team Decision Making</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-page" id="personalFinancialPage">
+        <div>
+            <h1>Personal Financial Literacy</h1>
+            <div class="events-buttons">
+                <a href="https://www.deca.org/compete/personal-financial-literacy" target="_blank" class="event-button light-green-button">Personal Financial Literacy</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-page" id="businessOperationsPage">
+        <div>
+            <h1>Business Operations Research</h1>
+            <div class="events-buttons">
+                <a href="https://www.deca.org/compete/business-services-operations-research" target="_blank" class="event-button yellow-button">Business Services Operations Research</a>
+                <a href="https://www.deca.org/compete/finance-operations-research" target="_blank" class="event-button dark-green-button">Finance Operations Research</a>
+                <a href="https://www.deca.org/compete/hospitality-and-tourism-operations-research" target="_blank" class="event-button blue-button">Hospitality and Tourism Operations Research</a>
+                <a href="https://www.deca.org/compete/buying-and-merchandising-operations-research" target="_blank" class="event-button red-button">Buying and Merchandising Operations Research</a>
+                <a href="https://www.deca.org/compete/sports-and-entertainment-marketing-operations-research" target="_blank" class="event-button red-button">Sports and Entertainment Marketing Operations Research</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-page" id="projectManagementPage">
+        <div>
+            <h1>Project Management</h1>
+            <div class="events-buttons">
+                <a href="https://www.deca.org/compete/business-solutions-project" target="_blank" class="event-button yellow-button">Business Solutions Project</a>
+                <a href="https://www.deca.org/compete/career-development-project" target="_blank" class="event-button yellow-button">Career Development Project</a>
+                <a href="https://www.deca.org/compete/community-awareness-project" target="_blank" class="event-button yellow-button">Community Awareness Project</a>
+                <a href="https://www.deca.org/compete/community-giving-project" target="_blank" class="event-button yellow-button">Community Giving Project</a>
+                <a href="https://www.deca.org/compete/financial-literacy-project" target="_blank" class="event-button yellow-button">Financial Literacy Project</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-page" id="businessPlanPage">
+        <div>
+            <h1>Business Plan</h1>
+            <div class="events-buttons">
+                <a href="https://www.deca.org/compete/business-growth-plan" target="_blank" class="event-button grey-button">Business Growth Plan</a>
+                <a href="https://www.deca.org/compete/franchise-business-plan" target="_blank" class="event-button grey-button">Franchise Business Plan</a>
+                <a href="https://www.deca.org/compete/independent-business-plan" target="_blank" class="event-button grey-button">Independent Business Plan</a>
+                <a href="https://www.deca.org/compete/innovation-plan" target="_blank" class="event-button grey-button">Innovation Plan</a>
+                <a href="https://www.deca.org/compete/international-business-plan" target="_blank" class="event-button grey-button">International Business Plan</a>
+                <a href="https://www.deca.org/compete/start-up-business-plan" target="_blank" class="event-button grey-button">Start-up Business Plan</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-page" id="integratedMarketingPage">
+        <div>
+            <h1>Integrated Marketing Campaign</h1>
+            <div class="events-buttons">
+                <a href="https://www.deca.org/compete/integrated-marketing-campaign-event" target="_blank" class="event-button red-button">Integrated Marketing Campaign - Event</a>
+                <a href="https://www.deca.org/compete/integrated-marketing-campaign-product" target="_blank" class="event-button red-button">Integrated Marketing Campaign - Product</a>
+                <a href="https://www.deca.org/compete/integrated-marketing-campaign-service" target="_blank" class="event-button red-button">Integrated Marketing Campaign - Service</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-page" id="virtualBusinessPage">
+        <div>
+            <h1>Virtual Business Challenge</h1>
+            <div class="events-buttons">
+                <a href="https://www.deca.org/compete/virtual-business-challenge-accounting" target="_blank" class="event-button dark-green-button">Virtual Business Challenge-Accounting</a>
+                <a href="https://www.deca.org/compete/virtual-business-challenge-entrepreneurship" target="_blank" class="event-button grey-button">Virtual Business Challenge-Entrepreneurship</a>
+                <a href="https://www.deca.org/compete/virtual-business-challenge-personal-finance" target="_blank" class="event-button light-green-button">Virtual Business Challenge-Personal Finance</a>
+                <a href="https://www.deca.org/compete/virtual-business-challenge-hotel-management" target="_blank" class="event-button blue-button">Virtual Business Challenge-Hotel Management</a>
+                <a href="https://www.deca.org/compete/virtual-business-challenge-restaurant" target="_blank" class="event-button blue-button">Virtual Business Challenge-Restaurant</a>
+                <a href="https://www.deca.org/compete/virtual-business-challenge-fashion" target="_blank" class="event-button red-button">Virtual Business Challenge-Fashion</a>
+                <a href="https://www.deca.org/compete/virtual-business-challenge-retail" target="_blank" class="event-button red-button">Virtual Business Challenge-Retail</a>
+                <a href="https://www.deca.org/compete/virtual-business-challenge-sports" target="_blank" class="event-button red-button">Virtual Business Challenge-Sports</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-page" id="stockMarketPage">
+        <div>
+            <h1>Stock Market Game</h1>
+            <div class="events-buttons">
+                <a href="https://www.deca.org/compete/stock-market-game" target="_blank" class="event-button dark-green-button">Stock Market Game</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Example Pages -->
+    <div class="content-page" id="rolePlayExamplePage">
+        <div>
+            <h1>Role Play Example Video</h1>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/38IoF_qblmk" title="Role Play Example" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-page" id="writtenExamplePage">
+        <div>
+            <h1>Written Example Presentation</h1>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Written Example Presentation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-page" id="writtenDocumentPage">
+        <div>
+            <h1>Written Example Document</h1>
+            <p>This is where the written example document would be displayed.</p>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-button" id="backButton">Back</button>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+    <script>
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Keep track of page history
+            let pageHistory = [];
+            
+            // Logo click to go back to home
+            document.getElementById('logo').addEventListener('click', function() {
+                showHomePage();
+            });
+
+            // Accordion functionality
+            const accordions = document.querySelectorAll('.accordion');
+            accordions.forEach(accordion => {
+                accordion.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const panel = this.nextElementSibling;
+                    if (panel.style.maxHeight) {
+                        panel.style.maxHeight = null;
+                    } else {
+                        panel.style.maxHeight = panel.scrollHeight + 'px';
+                    }
+                });
+            });
+
+            // Start button functionality
+            const startButton = document.getElementById('startButton');
+            if (startButton) {
+                startButton.addEventListener('click', function() {
+                    document.querySelector('.hero').style.display = 'none';
+                    document.querySelector('.about').style.display = 'none';
+                    document.querySelector('.contact').style.display = 'none';
+                    document.getElementById('quizPage').classList.add('active');
+                    showBackButton();
+                    pageHistory.push('home');
+                    showDecaQuestion();
+                });
+            }
+
+            // Navigation button clicks
+            document.getElementById('rolePlayWhatBtn').addEventListener('click', function() {
+                showRoleplayWhatPage();
+            });
+
+            document.getElementById('rolePlayExampleBtn').addEventListener('click', function() {
+                showRoleplayExamplePage();
+            });
+
+            document.getElementById('rolePlayResourcesBtn').addEventListener('click', function() {
+                showResourcesPage();
+            });
+
+            document.getElementById('writtenWhatBtn').addEventListener('click', function() {
+                showWrittenWhatPage();
+            });
+
+            document.getElementById('writtenExampleBtn').addEventListener('click', function() {
+                showWrittenExamplePage();
+            });
+
+            document.getElementById('writtenResourcesBtn').addEventListener('click', function() {
+                showResourcesPage();
+            });
+
+            document.getElementById('virtualBusinessBtn').addEventListener('click', function() {
+                showVirtualBusinessPage();
+            });
+
+            document.getElementById('calendarBtn').addEventListener('click', function() {
+                showCalendarPage();
+            });
+
+            // Events page buttons
+            document.getElementById('rolePlayButton').addEventListener('click', function() {
+                showRoleplayEventsPage();
+            });
+
+            document.getElementById('writtenButton').addEventListener('click', function() {
+                showWrittenEventsPage();
+            });
+
+            document.getElementById('otherButton').addEventListener('click', function() {
+                showOtherEventsPage();
+            });
+
+            // Calendar edit button
+            document.getElementById('editCalendarButton').addEventListener('click', function() {
+                hideAllPages();
+                document.getElementById('passwordFormPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('calendarPage');
+            });
+
+            // Password form buttons
+            document.getElementById('submitPassword').addEventListener('click', function() {
+                const password = document.getElementById('passwordInput').value;
+                if (password === 'test12345') {
+                    alert('Password correct! You can now edit the calendar.');
+                    goBack();
+                } else {
+                    alert('Incorrect password. Please try again.');
+                }
+            });
+
+            document.getElementById('cancelPassword').addEventListener('click', function() {
+                goBack();
+            });
+
+            // Not DECA member buttons
+            document.getElementById('doneFormButton').addEventListener('click', function() {
+                hideAllPages();
+                document.getElementById('gilbertRoomPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('notDecaMemberPage');
+            });
+
+            document.getElementById('okayButton').addEventListener('click', function() {
+                hideAllPages();
+                document.getElementById('quizPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('gilbertRoomPage');
+                showQuestion('event');
+            });
+
+            // Scroll functionality
+            const upText = document.getElementById('upText');
+            if (upText) {
+                upText.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            const downText = document.getElementById('downText');
+            if (downText) {
+                downText.addEventListener('click', function() {
+                    document.querySelector('.contact').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Copy text function for Logo 2
+            const logo2 = document.getElementById('logo2');
+            if (logo2) {
+                logo2.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navigator.clipboard.writeText('TEST2').then(function() {
+                        alert('Copied to clipboard: TEST2');
+                    }).catch(function(err) {
+                        console.error('Could not copy text: ', err);
+                    });
+                });
+            }
+
+            // Back button functionality
+            document.getElementById('backButton').addEventListener('click', function() {
+                goBack();
+            });
+
+            // Quiz functionality
+            const quizContent = document.getElementById('quizContent');
+            let currentQuestion = 'event';
+
+            function showDecaQuestion() {
+                quizContent.innerHTML = `
+                    <h1>Are You A Part of Deca?</h1>
+                    <div class="quiz-buttons">
+                        <button class="quiz-button yes-button" id="decaYesButton">Yes</button>
+                        <button class="quiz-button no-button" id="decaNoButton">No</button>
+                    </div>
+                `;
+                document.getElementById('decaYesButton').addEventListener('click', function() {
+                    showQuestion('event');
+                });
+                document.getElementById('decaNoButton').addEventListener('click', function() {
+                    hideAllPages();
+                    document.getElementById('notDecaMemberPage').classList.add('active');
+                    showBackButton();
+                    pageHistory.push('quizPage');
+                });
+            }
+
+            function showQuestion(questionType) {
+                currentQuestion = questionType;
+                quizContent.innerHTML = '';
+
+                switch(questionType) {
+                    case 'event':
+                        quizContent.innerHTML = `
+                            <h1>Do You Have An Event?</h1>
+                            <div class="quiz-buttons">
+                                <button class="quiz-button yes-button" id="yesButton">Yes</button>
+                                <button class="quiz-button no-button" id="noButton">No</button>
+                            </div>
+                        `;
+                        document.getElementById('yesButton').addEventListener('click', function() {
+                            document.getElementById('quizPage').classList.remove('active');
+                            document.getElementById('eventsPage').classList.add('active');
+                            pageHistory.push('quizPage');
+                        });
+                        document.getElementById('noButton').addEventListener('click', function() {
+                            showQuestion('improvise');
+                        });
+                        break;
+
+                    case 'improvise':
+                        quizContent.innerHTML = `
+                            <h1>Do you like to improvise?</h1>
+                            <div class="quiz-buttons">
+                                <button class="quiz-button yes-button" id="yesButton2">Yes</button>
+                                <button class="quiz-button no-button" id="noButton2">No</button>
+                            </div>
+                        `;
+                        document.getElementById('yesButton2').addEventListener('click', function() {
+                            showQuestion('workAlone');
+                        });
+                        document.getElementById('noButton2').addEventListener('click', function() {
+                            showQuestion('preferences');
+                        });
+                        break;
+
+                    case 'workAlone':
+                        quizContent.innerHTML = `
+                            <h1>Do you like to work alone or with a partner?</h1>
+                            <div class="quiz-buttons">
+                                <button class="quiz-button yes-button" id="aloneButton">Alone</button>
+                                <button class="quiz-button no-button" id="partnerButton">With Partner</button>
+                            </div>
+                        `;
+                        document.getElementById('aloneButton').addEventListener('click', function() {
+                            showQuestion('firstYear');
+                        });
+                        document.getElementById('partnerButton').addEventListener('click', function() {
+                            showResult('teamDecisionPage');
+                            pageHistory.push('quizPage');
+                        });
+                        break;
+
+                    case 'firstYear':
+                        quizContent.innerHTML = `
+                            <h1>Are you a first year member?</h1>
+                            <div class="quiz-buttons">
+                                <button class="quiz-button yes-button" id="firstYearYes">Yes</button>
+                                <button class="quiz-button no-button" id="firstYearNo">No</button>
+                            </div>
+                        `;
+                        document.getElementById('firstYearYes').addEventListener('click', function() {
+                            showResult('principlesPage');
+                            pageHistory.push('quizPage');
+                        });
+                        document.getElementById('firstYearNo').addEventListener('click', function() {
+                            showResult('individualRoleplayPage');
+                            pageHistory.push('quizPage');
+                        });
+                        break;
+
+                    case 'preferences':
+                        quizContent.innerHTML = `
+                            <h1>Which of these do you prefer?</h1>
+                            <div class="quiz-buttons">
+                                <button class="quiz-button nav-button-style" id="eventPlanning">Event Planning and Management</button>
+                                <button class="quiz-button nav-button-style" id="businessResearch">Business Research and Strategy</button>
+                                <button class="quiz-button nav-button-style" id="innovation">Innovation or Owning A Business</button>
+                                <button class="quiz-button nav-button-style" id="marketing">Marketing, Selling or Consulting</button>
+                                <button class="quiz-button nav-button-style" id="managingPortfolio">Managing a Portfolio of Stocks</button>
+                                <button class="quiz-button nav-button-style" id="simulation">Test Your Business Skills in a Simulation Game</button>
+                            </div>
+                        `;
+                        
+                        document.getElementById('eventPlanning').addEventListener('click', function() {
+                            showResult('projectManagementPage');
+                            pageHistory.push('quizPage');
+                        });
+                        document.getElementById('businessResearch').addEventListener('click', function() {
+                            showResult('businessOperationsPage');
+                            pageHistory.push('quizPage');
+                        });
+                        document.getElementById('innovation').addEventListener('click', function() {
+                            showResult('businessPlanPage');
+                            pageHistory.push('quizPage');
+                        });
+                        document.getElementById('marketing').addEventListener('click', function() {
+                            showQuestion('marketingType');
+                        });
+                        document.getElementById('managingPortfolio').addEventListener('click', function() {
+                            showResult('stockMarketPage');
+                            pageHistory.push('quizPage');
+                        });
+                        document.getElementById('simulation').addEventListener('click', function() {
+                            showResult('virtualBusinessPage');
+                            pageHistory.push('quizPage');
+                        });
+                        break;
+
+                    case 'marketingType':
+                        quizContent.innerHTML = `
+                            <h1>Which type of marketing?</h1>
+                            <div class="quiz-buttons">
+                                <button class="quiz-button nav-button-style" id="sellingConsulting">Selling/Consulting</button>
+                                <button class="quiz-button nav-button-style" id="integratedMarketingBtn">Integrated Marketing Campaign</button>
+                            </div>
+                        `;
+                        document.getElementById('sellingConsulting').addEventListener('click', function() {
+                            showResult('personalFinancialPage');
+                            pageHistory.push('quizPage');
+                        });
+                        document.getElementById('integratedMarketingBtn').addEventListener('click', function() {
+                            showResult('integratedMarketingPage');
+                            pageHistory.push('quizPage');
+                        });
+                        break;
+                }
+            }
+
+            function showResult(pageId) {
+                hideAllPages();
+                document.getElementById(pageId).classList.add('active');
+                showBackButton();
+            }
+
+            function hideAllPages() {
+                document.getElementById('quizPage').classList.remove('active');
+                document.getElementById('eventsPage').classList.remove('active');
+                document.getElementById('principlesPage').classList.remove('active');
+                document.getElementById('individualRoleplayPage').classList.remove('active');
+                document.getElementById('teamDecisionPage').classList.remove('active');
+                document.getElementById('personalFinancialPage').classList.remove('active');
+                document.getElementById('businessOperationsPage').classList.remove('active');
+                document.getElementById('projectManagementPage').classList.remove('active');
+                document.getElementById('businessPlanPage').classList.remove('active');
+                document.getElementById('integratedMarketingPage').classList.remove('active');
+                document.getElementById('virtualBusinessPage').classList.remove('active');
+                document.getElementById('stockMarketPage').classList.remove('active');
+                document.getElementById('rolePlayExamplePage').classList.remove('active');
+                document.getElementById('writtenExamplePage').classList.remove('active');
+                document.getElementById('writtenDocumentPage').classList.remove('active');
+                document.getElementById('calendarPage').classList.remove('active');
+                document.getElementById('passwordFormPage').classList.remove('active');
+                document.getElementById('notDecaMemberPage').classList.remove('active');
+                document.getElementById('gilbertRoomPage').classList.remove('active');
+                document.getElementById('resourcesPage').classList.remove('active');
+                document.getElementById('roleplayEventsPage').classList.remove('active');
+                document.getElementById('writtenEventsPage').classList.remove('active');
+                document.getElementById('otherEventsPage').classList.remove('active');
+                document.getElementById('roleplayWhatPage').classList.remove('active');
+                document.getElementById('writtenWhatPage').classList.remove('active');
+                document.getElementById('roleplayExamplePage').classList.remove('active');
+                document.getElementById('writtenExamplePage').classList.remove('active');
+                document.getElementById('resourcesPage').classList.remove('active');
+            }
+
+            function showHomePage() {
+                hideAllPages();
+                document.getElementById('homeSection').style.display = 'flex';
+                document.querySelector('.about').style.display = 'flex';
+                document.querySelector('.contact').style.display = 'block';
+                document.getElementById('backButton').style.display = 'none';
+                pageHistory = [];
+            }
+
+            function showBackButton() {
+                document.getElementById('backButton').style.display = 'block';
+            }
+
+            function goBack() {
+                if (pageHistory.length > 0) {
+                    const previousPage = pageHistory.pop();
+                    
+                    // Hide all pages
+                    hideAllPages();
+                    
+                    // Show the previous page
+                    if (previousPage === 'home') {
+                        showHomePage();
+                    } else {
+                        document.getElementById(previousPage).classList.add('active');
+                        showBackButton();
+                    }
+                } else {
+                    showHomePage();
+                }
+            }
+
+            // Show event buttons when "What?" is clicked
+            function showRoleplayWhatPage() {
+                hideAllPages();
+                document.getElementById('roleplayWhatPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+            }
+
+            function showWrittenWhatPage() {
+                hideAllPages();
+                document.getElementById('writtenWhatPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+            }
+
+            // Show example pages
+            function showRoleplayExamplePage() {
+                hideAllPages();
+                document.getElementById('rolePlayExamplePage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+            }
+
+            function showWrittenExamplePage() {
+                hideAllPages();
+                document.getElementById('writtenExamplePage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+            }
+
+            // Show resources page
+            function showResourcesPage() {
+                hideAllPages();
+                document.getElementById('resourcesPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+            }
+
+            // Events calendar
+            function showCalendarPage() {
+                hideAllPages();
+                document.getElementById('calendarPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+                initializeCalendar();
+            }
+
+            // Initialize FullCalendar
+            function initializeCalendar() {
+                var calendarEl = document.getElementById('calendar');
+                if (calendarEl) {
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'dayGridMonth',
+                        headerToolbar: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                        },
+                        events: [
+                            {
+                                title: 'DECA Meeting',
+                                start: '2023-12-05',
+                                end: '2023-12-05'
+                            },
+                            {
+                                title: 'Workshop',
+                                start: '2023-12-12',
+                                end: '2023-12-12'
+                            },
+                            {
+                                title: 'Competition',
+                                start: '2023-12-19',
+                                end: '2023-12-19'
+                            }
+                        ]
+                    });
+                    calendar.render();
+                }
+            }
+
+            // Show events pages
+            function showRoleplayEventsPage() {
+                hideAllPages();
+                const eventsPage = document.getElementById('eventsPage');
+                eventsPage.innerHTML = `
+                    <div class="events-content">
+                        <h1>RolePlay Events</h1>
+                        <div class="events-buttons">
+                            <button class="event-button" onclick="showRoleplayWhatPage()">What?</button>
+                            <button class="event-button" onclick="showRoleplayExamplePage()">Example</button>
+                            <button class="event-button" onclick="showResourcesPage()">Resources</button>
+                        </div>
+                    </div>
+                `;
+                eventsPage.classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+            }
+
+            function showWrittenEventsPage() {
+                hideAllPages();
+                const eventsPage = document.getElementById('eventsPage');
+                eventsPage.innerHTML = `
+                    <div class="events-content">
+                        <h1>Written Events</h1>
+                        <div class="events-buttons">
+                            <button class="event-button" onclick="showWrittenWhatPage()">What?</button>
+                            <button class="event-button" onclick="showWrittenExamplePage()">Example</button>
+                            <button class="event-button" onclick="showResourcesPage()">Resources</button>
+                        </div>
+                    </div>
+                `;
+                eventsPage.classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+            }
+
+            function showOtherEventsPage() {
+                hideAllPages();
+                const eventsPage = document.getElementById('eventsPage');
+                eventsPage.innerHTML = `
+                    <div class="events-content">
+                        <h1>Other Events</h1>
+                        <div class="events-buttons">
+                            <a href="https://www.deca.org/compete/stock-market-game" target="_blank" class="event-button dark-green-button">Stock Market Game</a>
+                            <button class="event-button" onclick="showVirtualBusinessPage()">Virtual Business Challenge</button>
+                        </div>
+                    </div>
+                `;
+                eventsPage.classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+            }
+
+            function showVirtualBusinessPage() {
+                hideAllPages();
+                document.getElementById('virtualBusinessPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+            }
+
+            // Create additional pages
+            const roleplayWhatPage = document.createElement('div');
+            roleplayWhatPage.className = 'content-page';
+            roleplayWhatPage.id = 'roleplayWhatPage';
+            roleplayWhatPage.innerHTML = `
+                <div>
+                    <h1>RolePlay Events - What?</h1>
+                    <div class="events-buttons">
+                        <button class="event-button" onclick="showPage('principlesPage')">Principles Events Page</button>
+                        <button class="event-button" onclick="showPage('individualRoleplayPage')">Individual Roleplay Page</button>
+                        <button class="event-button" onclick="showPage('teamDecisionPage')">Team Decision Making Page</button>
+                        <a href="https://www.deca.org/compete/personal-financial-literacy" target="_blank" class="event-button light-green-button">Personal Financial Literacy</a>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(roleplayWhatPage);
+
+            const writtenWhatPage = document.createElement('div');
+            writtenWhatPage.className = 'content-page';
+            writtenWhatPage.id = 'writtenWhatPage';
+            writtenWhatPage.innerHTML = `
+                <div>
+                    <h1>Written Events - What?</h1>
+                    <div class="events-buttons">
+                        <button class="event-button" onclick="showPage('businessOperationsPage')">Business Operations Research</button>
+                        <button class="event-button" onclick="showPage('projectManagementPage')">Project Management</button>
+                        <button class="event-button" onclick="showPage('businessPlanPage')">Business Plan</button>
+                        <button class="event-button" onclick="showPage('integratedMarketingPage')">Integrated Marketing Campaign</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(writtenWhatPage);
+
+            // Function to show a specific page
+            window.showPage = function(pageId) {
+                hideAllPages();
+                document.getElementById(pageId).classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+            }
+        });
+    </script>
+</body>
+</html>
