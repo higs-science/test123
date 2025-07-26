@@ -568,30 +568,26 @@
             transform: rotate(225deg);
         }
         /* Calendar */
-        /* Events Calendar Page - Make it full screen */
+        /* Events Calendar Page - Make it full screen and responsive */
         #eventsCalendarPage {
-            position: fixed; /* Cover viewport */
-            top: 70px; /* Start below the navbar (approx height) */
+            position: fixed;
+            top: 70px; /* Start below the navbar */
             left: 0;
             width: 100%;
-            height: calc(100vh - 70px); /* Full height minus navbar */
+            height: calc(100vh - 70px);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            display: none; /* Hidden by default */
+            display: none;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 10px; /* Reduced padding */
-            overflow: hidden; /* Contain content */
-            z-index: 999; /* Below navbar */
+            padding: 10px;
+            overflow: hidden;
+            z-index: 999;
         }
         #eventsCalendarPage.active {
             display: flex;
         }
-        /* Adjust calendar container for full screen */
         .calendar-container {
             width: 100%;
-            max-width: none;
             background: white;
             border-radius: 8px;
             padding: 10px;
@@ -614,9 +610,26 @@
             padding: 4px 8px;
             font-size: 0.85rem;
         }
+        /* Responsive adjustments for FullCalendar toolbar */
+        @media (max-width: 768px) {
+            .fc .fc-toolbar.fc-header-toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .fc .fc-toolbar-title {
+                font-size: 1rem;
+                margin: 5px 0;
+            }
+            .fc .fc-button {
+                font-size: 0.75rem;
+                padding: 3px 6px;
+            }
+            .fc .fc-toolbar-chunk {
+                margin-bottom: 5px;
+            }
+        }
         .slides-section {
             width: 100%;
-            max-width: none;
             margin-top: 10px;
             flex-shrink: 0;
         }
@@ -627,6 +640,8 @@
         .slides-box {
             padding: 8px;
             min-height: 80px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
         }
         /* Form styles */
         .form-container {
@@ -668,7 +683,7 @@
         .password-form p {
             color: black;
         }
-        /* Resources Page */
+        /* Resources Pages - New Styles */
         .resources-page {
             height: 100vh;
             display: none;
@@ -686,23 +701,30 @@
         }
         .resources-content {
             width: 90%;
-            max-width: 800px;
+            max-width: 1200px; /* Wider for two columns */
         }
         .resources-content h1 {
             font-size: 3rem;
             margin-bottom: 40px;
         }
-        .resource-category {
+        /* Two-column layout for resources */
+        .resources-columns {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+        }
+        .resource-column {
+            flex: 1;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             padding: 20px;
-            margin-bottom: 20px;
             text-align: left;
         }
-        .resource-category h2 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+        .resource-column h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
             color: #fff;
+            text-align: center;
         }
         .resource-list {
             list-style-type: none;
@@ -722,6 +744,63 @@
         .resource-link:hover {
             text-decoration: underline;
         }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 20px;
+            }
+            .nav-buttons {
+                gap: 15px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .about {
+                flex-direction: column;
+                padding: 50px 20px;
+                height: auto;
+            }
+            .about-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .about-text, .about-image {
+                flex: none;
+                width: 100%;
+            }
+            .about-image {
+                height: 300px;
+            }
+            .contact {
+                padding: 50px 20px;
+                height: auto;
+            }
+            .contact-sections {
+                flex-direction: column;
+                gap: 30px;
+            }
+            .social-media, .other {
+                flex: none;
+                width: 100%;
+            }
+            .resources-columns {
+                flex-direction: column;
+            }
+            .content-page, .events-page, .quiz-page, .resources-page {
+                padding: 10px;
+            }
+            .content-page h1, .events-content h1, .resources-content h1 {
+                font-size: 2rem;
+            }
+            .event-button, .quiz-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+                min-width: 150px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -735,7 +814,7 @@
                 <div class="dropdown">
                     <button class="dropdown-button" onclick="showSubButtons('roleplay')">What?</button>
                     <button class="dropdown-button" onclick="showRoleplayExample()">Example</button>
-                    <button class="dropdown-button" onclick="showResourcesPage()">Resources</button>
+                    <button class="dropdown-button" onclick="showResourcesRoleplayPage()">Resources</button>
                 </div>
             </div>
 
@@ -744,8 +823,10 @@
                 Written
                 <div class="dropdown">
                      <button class="dropdown-button" onclick="showWrittenSubButtons('written')">What?</button>
-                    <button class="dropdown-button" onclick="showWrittenExample()">Example</button>
-                    <button class="dropdown-button" onclick="showResourcesPage()">Resources</button>
+                    <!-- INSERT THIS LINE -->
+                    <button class="dropdown-button" onclick="showWrittenExampleDirect()">Example</button>
+                    <!-- INSERT THIS LINE -->
+                    <button class="dropdown-button" onclick="showResourcesWrittenPage()">Resources</button>
                 </div>
             </div>
 
@@ -754,7 +835,8 @@
                 Other
                 <div class="dropdown">
                     <a href="https://www.deca.org/compete/stock-market-game" target="_blank" class="dropdown-button dark-green-button">Stock Market Game</a>
-                    <button class="dropdown-button" onclick="showVirtualBusinessChallenges()">Virtual Business Challenge</button>
+                    <!-- INSERT THIS LINE -->
+                    <button class="dropdown-button" onclick="showVirtualBusinessChallengesDirect()">Virtual Business Challenge</button>
                 </div>
             </div>
 
@@ -855,7 +937,7 @@
         <div class="calendar-container">
             <div class="calendar-header">
                 <div class="calendar-title">Event Calendar</div>
-                <button class="edit-button" id="editCalendarButton">Edit</button>
+                <!-- Removed the Edit button -->
             </div>
             <div id="calendar"></div>
             <div class="slides-section">
@@ -900,32 +982,56 @@
         </div>
     </div>
 
-    <!-- Resources Page -->
-    <div class="resources-page" id="resourcesPage">
+    <!-- Resources Roleplay Page (New) -->
+    <div class="resources-page" id="resourcesRoleplayPage">
         <div class="resources-content">
-            <h1>Resources Page</h1>
-            <div class="resource-category">
-                <h2>RolePlay Resources</h2>
-                <ul class="resource-list">
-                    <li><a href="#" class="resource-link">Learn to Improvise</a></li>
-                    <li><a href="#" class="resource-link">Exam Prep</a></li>
-                    <li><a href="#" class="resource-link">Roleplay Prep</a></li>
-                </ul>
+            <h1>Resources - Role Play</h1>
+            <div class="resources-columns">
+                <div class="resource-column">
+                   <h2>Writing</h2>
+                    <ul class="resource-list">
+                        <li><a href="#" class="resource-link">Business Writing Guide</a></li>
+                        <li><a href="#" class="resource-link">Report Structures</a></li>
+                        <li><a href="#" class="resource-link">Grammar & Style</a></li>
+                        <li><a href="#" class="resource-link">Sample Reports</a></li>
+                    </ul>
+                </div>
+                <div class="resource-column">
+                    <h2>Presentation</h2>
+                    <ul class="resource-list">
+                        <li><a href="#" class="resource-link">Presentation Tips</a></li>
+                        <li><a href="#" class="resource-link">Slide Design</a></li>
+                        <li><a href="#" class="resource-link">Delivery Skills</a></li>
+                        <li><a href="#" class="resource-link">Practice Presentations</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="resource-category">
-                <h2>Written Resources</h2>
-                <ul class="resource-list">
-                    <li><a href="#" class="resource-link">Writing</a></li>
-                    <li><a href="#" class="resource-link">Presentation Prep</a></li>
-                </ul>
-            </div>
-            <div class="resource-category">
-                <h2>General Resources</h2>
-                <ul class="resource-list">
-                    <li><a href="#" class="resource-link">DECA Guidelines</a></li>
-                    <li><a href="#" class="resource-link">Competition Tips</a></li>
-                    <li><a href="#" class="resource-link">Study Materials</a></li>
-                </ul>
+        </div>
+    </div>
+
+     <!-- Resources Written Page (New) -->
+    <div class="resources-page" id="resourcesWrittenPage">
+        <div class="resources-content">
+            <h1>Resources - Written</h1>
+            <div class="resources-columns">
+                <div class="resource-column">
+                    <h2>Presentation Prep</h2>
+                    <ul class="resource-list">
+                        <li><a href="#" class="resource-link">Presentation Tips</a></li>
+                        <li><a href="#" class="resource-link">Slide Design</a></li>
+                        <li><a href="#" class="resource-link">Delivery Skills</a></li>
+                        <li><a href="#" class="resource-link">Practice Presentations</a></li>
+                    </ul>
+                </div>
+                <div class="resource-column">
+                    <h2>Writing</h2>
+                    <ul class="resource-list">
+                        <li><a href="#" class="resource-link">Business Writing Guide</a></li>
+                        <li><a href="#" class="resource-link">Report Structures</a></li>
+                        <li><a href="#" class="resource-link">Grammar & Style</a></li>
+                        <li><a href="#" class="resource-link">Sample Reports</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -1091,34 +1197,52 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Keep track of page history
             let pageHistory = [];
-            // Initialize FullCalendar
+            
+            // Initialize FullCalendar correctly
             var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                events: [
-                    {
-                        title: 'DECA Meeting',
-                        start: '2023-12-05',
-                        end: '2023-12-05'
+            if (calendarEl) {
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
                     },
-                    {
-                        title: 'Workshop',
-                        start: '2023-12-12',
-                        end: '2023-12-12'
-                    },
-                    {
-                        title: 'Competition',
-                        start: '2023-12-19',
-                        end: '2023-12-19'
+                    // Ensure events are defined correctly with actual Date objects
+                    events: [
+                        {
+                            title: 'DECA Meeting',
+                            start: new Date(), // Today's date
+                            backgroundColor: '#667eea',
+                            borderColor: '#667eea'
+                        },
+                        {
+                            title: 'Workshop',
+                            start: new Date(new Date().setDate(new Date().getDate() + 3)), // In 3 days
+                            backgroundColor: '#764ba2',
+                            borderColor: '#764ba2'
+                        },
+                        {
+                            title: 'Competition',
+                            start: new Date(new Date().setDate(new Date().getDate() + 10)), // In 10 days
+                            backgroundColor: '#4CAF50',
+                            borderColor: '#4CAF50'
+                        },
+                        {
+                            title: 'Deadline: Project Submissions',
+                            start: new Date(new Date().setDate(new Date().getDate() + 17)), // In 17 days
+                            backgroundColor: '#f44336',
+                            borderColor: '#f44336'
+                        }
+                    ],
+                    // Optional: Add event click handler
+                    eventClick: function(info) {
+                        alert('Event: ' + info.event.title);
                     }
-                ]
-            });
-            calendar.render();
+                });
+                calendar.render();
+            }
+            
             // Logo click to go back to home
             document.getElementById('logo').addEventListener('click', function() {
                 showHomePage();
@@ -1202,30 +1326,36 @@
             document.getElementById('backButton').addEventListener('click', function() {
                 goBack();
             });
-            // Events navigation
-            document.getElementById('eventsNav').addEventListener('click', function() {
-                showEventsCalendar();
-                pageHistory.push('home');
+            // Events navigation - Clicking "Events" in navbar goes to calendar
+            document.getElementById('eventsNav').addEventListener('click', function(event) {
+                // Prevent default if it's the nav-button itself being clicked
+                if (event.target === this) {
+                    event.preventDefault();
+                    showEventsCalendar();
+                    pageHistory.push('home');
+                }
             });
-            // Calendar edit button
-            document.getElementById('editCalendarButton').addEventListener('click', function() {
-                hideAllPages();
-                document.getElementById('passwordFormPage').classList.add('active');
-                showBackButton();
-                pageHistory.push('eventsCalendarPage');
-            });
+            
+            // Calendar edit button removed
+            
             // Password form buttons
             document.getElementById('submitPassword').addEventListener('click', function() {
                 const password = document.getElementById('passwordInput').value;
                 if (password === 'test12345') {
                     alert('Password correct! You can now edit the calendar.');
-                    goBack();
+                    // Instead of going back, just hide the password form and show the calendar
+                    document.getElementById('passwordFormPage').classList.remove('active');
+                    document.getElementById('eventsCalendarPage').classList.add('active');
+                    showBackButton();
                 } else {
                     alert('Incorrect password. Please try again.');
                 }
             });
             document.getElementById('cancelPassword').addEventListener('click', function() {
-                goBack();
+                // Instead of going back, just hide the password form and show the calendar
+                document.getElementById('passwordFormPage').classList.remove('active');
+                document.getElementById('eventsCalendarPage').classList.add('active');
+                showBackButton();
             });
             // Not DECA member buttons
             document.getElementById('doneFormButton').addEventListener('click', function() {
@@ -1241,38 +1371,7 @@
                 pageHistory.push('gilbertRoomPage');
                 showQuestion('event');
             });
-            // Dropdown positioning
-            function positionDropdowns() {
-                const roleplayDropdown = document.getElementById('roleplayDropdown');
-                const writtenDropdown = document.getElementById('writtenDropdown');
-                const otherDropdown = document.getElementById('otherDropdown');
-                const eventsDropdown = document.getElementById('eventsDropdown');
-                const windowWidth = window.innerWidth;
-                // Position main dropdowns
-                if (windowWidth > 768) {
-                    roleplayDropdown.classList.add('left-dropdown');
-                    writtenDropdown.classList.add('left-dropdown');
-                    otherDropdown.classList.add('left-dropdown');
-                    eventsDropdown.classList.add('left-dropdown');
-                    roleplayDropdown.classList.remove('right-dropdown');
-                    writtenDropdown.classList.remove('right-dropdown');
-                    otherDropdown.classList.remove('right-dropdown');
-                    eventsDropdown.classList.remove('right-dropdown');
-                } else {
-                    roleplayDropdown.classList.add('right-dropdown');
-                    writtenDropdown.classList.add('right-dropdown');
-                    otherDropdown.classList.add('right-dropdown');
-                    eventsDropdown.classList.add('right-dropdown');
-                    roleplayDropdown.classList.remove('left-dropdown');
-                    writtenDropdown.classList.remove('left-dropdown');
-                    otherDropdown.classList.remove('left-dropdown');
-                    eventsDropdown.classList.remove('left-dropdown');
-                }
-            }
-            // Call on load and resize
-            // positionDropdowns(); // Not needed anymore as dropdowns are direct children
-            // window.addEventListener('resize', positionDropdowns);
-
+            
             // Quiz functionality
             const quizContent = document.getElementById('quizContent');
             let currentQuestion = 'event';
@@ -1424,62 +1523,75 @@
                 showBackButton();
             }
             function hideAllPages() {
-                document.getElementById('quizPage').classList.remove('active');
-                document.getElementById('eventsPage').classList.remove('active');
-                document.getElementById('principlesPage').classList.remove('active');
-                document.getElementById('individualRoleplayPage').classList.remove('active');
-                document.getElementById('teamDecisionPage').classList.remove('active');
-                document.getElementById('personalFinancialPage').classList.remove('active');
-                document.getElementById('businessOperationsPage').classList.remove('active');
-                document.getElementById('projectManagementPage').classList.remove('active');
-                document.getElementById('businessPlanPage').classList.remove('active');
-                document.getElementById('integratedMarketingPage').classList.remove('active');
-                document.getElementById('virtualBusinessPage').classList.remove('active');
-                document.getElementById('stockMarketPage').classList.remove('active');
-                document.getElementById('rolePlayExamplePage').classList.remove('active');
-                document.getElementById('writtenExamplePage').classList.remove('active');
-                document.getElementById('writtenDocumentPage').classList.remove('active');
-                document.getElementById('eventsCalendarPage').classList.remove('active');
-                document.getElementById('passwordFormPage').classList.remove('active');
-                document.getElementById('notDecaMemberPage').classList.remove('active');
-                document.getElementById('gilbertRoomPage').classList.remove('active');
-                document.getElementById('resourcesPage').classList.remove('active');
+                // Get all elements with class 'content-page', 'quiz-page', 'events-page'
+                const pages = document.querySelectorAll('.content-page, .quiz-page, .events-page, #eventsCalendarPage, #homeSection, .about, .contact');
+                pages.forEach(page => {
+                    // Remove active class
+                    page.classList.remove('active');
+                    // Hide home sections specifically
+                    if (page.id === 'homeSection' || page.classList.contains('about') || page.classList.contains('contact')) {
+                        page.style.display = 'none';
+                    }
+                });
+                // Also hide the back button by default, it will be shown if needed
+                document.getElementById('backButton').style.display = 'none';
             }
             function showHomePage() {
                 hideAllPages();
                 document.getElementById('homeSection').style.display = 'flex';
                 document.querySelector('.about').style.display = 'flex';
                 document.querySelector('.contact').style.display = 'block';
+                // Do not show back button on home page
                 document.getElementById('backButton').style.display = 'none';
-                pageHistory = [];
+                pageHistory = []; // Clear history when going home
             }
             function showBackButton() {
                 document.getElementById('backButton').style.display = 'block';
             }
             function goBack() {
                 if (pageHistory.length > 0) {
-                    const previousPage = pageHistory.pop();
-                    // Hide all pages
+                    const previousPageId = pageHistory.pop();
+                    // Hide all pages first
                     hideAllPages();
-                    // Show the previous page
-                    if (previousPage === 'home') {
+
+                    // Check if the previous page is the home page
+                    if (previousPageId === 'home') {
                         showHomePage();
                     } else {
-                        document.getElementById(previousPage).classList.add('active');
-                        showBackButton();
+                        // Try to show the previous page by ID
+                        const previousPage = document.getElementById(previousPageId);
+                        if (previousPage) {
+                            previousPage.classList.add('active');
+                            // Show back button unless it's the final step or home
+                            if (previousPageId !== 'home') {
+                                showBackButton();
+                            } else {
+                                // This case should ideally not happen as 'home' is handled above
+                                document.getElementById('backButton').style.display = 'none';
+                            }
+                        } else {
+                            // Fallback if page ID is invalid
+                            console.warn(`Page with ID '${previousPageId}' not found.`);
+                            showHomePage();
+                        }
                     }
                 } else {
+                    // If history is empty, go back to home
                     showHomePage();
                 }
             }
-            // Show sub buttons based on category
+            
+            // Show sub buttons based on category (for What? button click from dropdown)
+            // This function is also called when clicking the main "RolePlay" or "Written" nav buttons
             window.showSubButtons = function(category) {
                 hideAllPages();
+                // Hide home sections explicitly
                 document.getElementById('homeSection').style.display = 'none';
                 document.querySelector('.about').style.display = 'none';
                 document.querySelector('.contact').style.display = 'none';
+
                 const eventsPage = document.getElementById('eventsPage');
-                const eventsContent = document.querySelector('.events-content');
+                const eventsContent = eventsPage.querySelector('.events-content');
                 eventsPage.classList.add('active');
                 showBackButton();
                 let buttonsHTML = '';
@@ -1490,38 +1602,31 @@
                             <div class="events-buttons">
                                 <button class="event-button" onclick="showRoleplayEvents()">What?</button>
                                 <button class="event-button" onclick="showRoleplayExample()">Example</button>
-                                <button class="event-button" onclick="showResourcesPage()">Resources</button>
+                                <button class="event-button" onclick="showResourcesRoleplayPage()">Resources</button>
                             </div>
                         `;
                         break;
-                }
-                eventsContent.innerHTML = buttonsHTML;
-            }
-             window.showWrittenSubButtons = function(category) {
-                hideAllPages();
-                document.getElementById('homeSection').style.display = 'none';
-                document.querySelector('.about').style.display = 'none';
-                document.querySelector('.contact').style.display = 'none';
-                const eventsPage = document.getElementById('eventsPage');
-                const eventsContent = document.querySelector('.events-content');
-                eventsPage.classList.add('active');
-                showBackButton();
-                let buttonsHTML = '';
-                switch(category) {
-                    case 'written':
+                     case 'written':
                         buttonsHTML = `
                             <h1>Written</h1>
                             <div class="events-buttons">
                                 <button class="event-button" onclick="showWrittenEvents()">What?</button>
                                 <button class="event-button" onclick="showWrittenExample()">Example</button>
-                                <button class="event-button" onclick="showResourcesPage()">Resources</button>
+                                <button class="event-button" onclick="showResourcesWrittenPage()">Resources</button>
                             </div>
                         `;
                         break;
                 }
                 eventsContent.innerHTML = buttonsHTML;
+                pageHistory.push('home'); // Navigated from home dropdown or navbar click
             }
-            // Show event buttons when "What?" is clicked
+            
+            // Alias for written sub buttons
+            window.showWrittenSubButtons = function(category) {
+                 showSubButtons(category);
+            }
+
+            // Show event buttons when "What?" is clicked (inside events flow)
             window.showRoleplayEvents = function() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
@@ -1533,9 +1638,10 @@
                         <a href="https://www.deca.org/compete/personal-financial-literacy" target="_blank" class="event-button light-green-button">Personal Financial Literacy</a>
                     </div>
                 `;
-                pageHistory.push('eventsPage');
+                 pageHistory.push('eventsPage'); // Stay on eventsPage context
             }
-             window.showWrittenEvents = function() {
+            
+            window.showWrittenEvents = function() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
                     <h1>Written Events</h1>
@@ -1546,72 +1652,76 @@
                         <button class="event-button" onclick="showPage('integratedMarketingPage')">Integrated Marketing Campaign</button>
                     </div>
                 `;
-                pageHistory.push('eventsPage');
+                 pageHistory.push('eventsPage'); // Stay on eventsPage context
             }
-            window.showVirtualBusinessChallenges = function() {
-                hideAllPages();
-                document.getElementById('virtualBusinessPage').classList.add('active');
-                showBackButton();
-                pageHistory.push('home');
-            }
-            // Example pages - Updated to push 'home' for direct nav from top bar
+
+            // Direct navigation functions from top bar dropdowns
             window.showRoleplayExample = function() {
                 hideAllPages();
                 document.getElementById('rolePlayExamplePage').classList.add('active');
                 showBackButton();
-                // Change this line:
-                // pageHistory.push('eventsPage');
-                // To this:
-                pageHistory.push('home'); // Indicate navigation came from the main home/navigation context
+                pageHistory.push('home'); // Came from top nav
             }
 
             window.showWrittenExample = function() {
                 hideAllPages();
                 document.getElementById('writtenExamplePage').classList.add('active');
                 showBackButton();
-                // Change this line:
-                // pageHistory.push('eventsPage');
-                // To this:
-                pageHistory.push('home'); // Indicate navigation came from the main home/navigation context
+                pageHistory.push('eventsPage'); // Came from event selection list // Came from top nav
 
-                // Add scroll listener for written example (this part remains the same)
+                // Add scroll listener for written example
                 setTimeout(function() {
                     const writtenExamplePage = document.getElementById('writtenExamplePage');
                     writtenExamplePage.addEventListener('scroll', function() {
                         if (writtenExamplePage.scrollTop + writtenExamplePage.clientHeight >= writtenExamplePage.scrollHeight - 5) {
                             hideAllPages();
                             document.getElementById('writtenDocumentPage').classList.add('active');
+                            showBackButton();
                             pageHistory.push('writtenExamplePage'); // This transition IS from writtenExamplePage
                         }
                     });
                 }, 100);
             }
 
-            // Resources page - Updated to push 'home' for direct nav from top bar
-            window.showResourcesPage = function() {
+            // NEW: Resources pages - Direct navigation from top bar dropdowns
+            window.showResourcesRoleplayPage = function() {
                 hideAllPages();
-                document.getElementById('resourcesPage').classList.add('active');
+                document.getElementById('resourcesRoleplayPage').classList.add('active');
                 showBackButton();
-                // Change this line:
-                // pageHistory.push('eventsPage');
-                // To this:
-                pageHistory.push('home'); // Indicate navigation came from the main home/navigation context
+                pageHistory.push('home'); // Came from top nav
             }
+
+            window.showResourcesWrittenPage = function() {
+                hideAllPages();
+                document.getElementById('resourcesWrittenPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home'); // Came from top nav
+            }
+
+            window.showVirtualBusinessChallenges = function() {
+                hideAllPages();
+                document.getElementById('virtualBusinessPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home'); // Came from top nav
+            }
+            
             // Events calendar
             window.showEventsCalendar = function() {
                 hideAllPages();
                 document.getElementById('eventsCalendarPage').classList.add('active');
                 showBackButton();
-                pageHistory.push('home');
+                pageHistory.push('home'); // Came from top nav
             }
-            // Function to show a specific page
+            
+            // Function to show a specific page (used within event flow)
             window.showPage = function(pageId) {
                 hideAllPages();
                 document.getElementById(pageId).classList.add('active');
                 showBackButton();
-                pageHistory.push('eventsPage');
+                pageHistory.push('eventsPage'); // Came from event selection list
             }
-            // Show events pages from Events Page buttons
+            
+            // Show events pages from Events Page buttons (Quiz flow initial buttons)
             function showRoleplayEventsPage() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
@@ -1624,6 +1734,7 @@
                     </div>
                 `;
             }
+            
             function showWrittenEventsPage() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
@@ -1636,6 +1747,7 @@
                     </div>
                 `;
             }
+            
             function showOtherEventsPage() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
@@ -1646,7 +1758,52 @@
                     </div>
                 `;
             }
-        });
+
+             // Initialize by showing home sections
+             showHomePage();
+                        // --- INSERT THESE THREE NEW FUNCTIONS ---
+            // Direct navigation for Written Example from top bar
+            window.showWrittenExampleDirect = function() {
+                hideAllPages();
+                document.getElementById('writtenExamplePage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home'); // Came from top nav
+                // Re-attach scroll listener for written example
+                setTimeout(function() {
+                    const writtenExamplePage = document.getElementById('writtenExamplePage');
+                    // Remove previous listener if any (prevent duplicates)
+                    const newListener = function() {
+                        if (writtenExamplePage.scrollTop + writtenExamplePage.clientHeight >= writtenExamplePage.scrollHeight - 5) {
+                            hideAllPages();
+                            document.getElementById('writtenDocumentPage').classList.add('active');
+                            showBackButton();
+                            pageHistory.push('writtenExamplePage');
+                            // Remove listener after triggering
+                            writtenExamplePage.removeEventListener('scroll', newListener);
+                        }
+                    };
+                    writtenExamplePage.addEventListener('scroll', newListener);
+                }, 100);
+            };
+            
+            // Direct navigation for Written Resources from top bar
+            window.showResourcesWrittenPage = function() {
+                hideAllPages();
+                document.getElementById('resourcesWrittenPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home'); // Came from top nav
+            };
+            
+            // Direct navigation for Virtual Business Challenges from top bar
+            window.showVirtualBusinessChallengesDirect = function() {
+                hideAllPages();
+                document.getElementById('virtualBusinessPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home'); // Came from top nav
+            };
+            // --- END INSERT ---
+
+        }); // End DOMContentLoaded
     </script>
 </body>
 </html>
