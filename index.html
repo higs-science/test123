@@ -12,12 +12,10 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Arial', sans-serif;
             overflow-x: hidden;
         }
-
         /* Navigation Bar */
         .navbar {
             position: fixed;
@@ -32,19 +30,16 @@
             padding: 15px 50px;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
-
         .logo {
             height: 40px;
             width: auto;
             cursor: pointer;
         }
-
         .nav-buttons {
             display: flex;
             gap: 25px;
             position: relative;
         }
-
         .nav-button {
             background: none;
             border: none;
@@ -57,12 +52,10 @@
             transition: all 0.3s ease;
             position: relative;
         }
-
         .nav-button:hover {
             background: #667eea;
             color: white;
         }
-
         /* Dropdown menus */
         .dropdown {
             position: absolute;
@@ -75,11 +68,9 @@
             z-index: 1001;
             min-width: 200px;
         }
-
         .nav-button:hover .dropdown {
             display: block;
         }
-
         .dropdown-button {
             display: block;
             width: 100%;
@@ -92,11 +83,51 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .dropdown-button:hover {
             background: #f0f0f0;
         }
-
+        /* Resources dropdown */
+        .resources-dropdown {
+            position: absolute;
+            top: 0;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px 0;
+            display: none;
+            z-index: 1002;
+            min-width: 200px;
+        }
+        .left-dropdown {
+            left: 0;
+        }
+        .right-dropdown {
+            right: 0;
+        }
+        .resources-button:hover .resources-dropdown {
+            display: block;
+        }
+        /* Sub-dropdown menus */
+        .sub-dropdown {
+            position: absolute;
+            top: 0;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px 0;
+            display: none;
+            z-index: 1003;
+            min-width: 200px;
+        }
+        .sub-dropdown.left {
+            left: 100%;
+        }
+        .sub-dropdown.right {
+            right: 100%;
+        }
+        .resources-button:hover .sub-dropdown {
+            display: block;
+        }
         /* Hero Section */
         .hero {
             height: 100vh;
@@ -113,20 +144,17 @@
             color: white;
             padding: 0 20px;
         }
-
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-
         .hero p {
             font-size: 1.5rem;
             margin-bottom: 40px;
             max-width: 800px;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
-
         .start-button {
             background: #667eea;
             color: white;
@@ -139,13 +167,11 @@
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
-
         .start-button:hover {
             background: #5a6fd8;
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
-
         /* About Section */
         .about {
             height: 100vh;
@@ -154,24 +180,40 @@
             padding: 0 100px;
             background: #f8f9fa;
         }
-
         .about-content {
             display: flex;
             align-items: center;
             gap: 50px;
             width: 100%;
         }
-
         .about-text {
             flex: 1;
         }
-
         .about-text h2 {
             font-size: 3rem;
             margin-bottom: 30px;
             color: #333;
         }
-
+        .about-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #666;
+        }
+        .about-image {
+            flex: 1;
+            height: 500px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        /* Accordion */
         .accordion {
             background-color: #f1f1f1;
             color: #444;
@@ -186,11 +228,9 @@
             margin-bottom: 5px;
             border-radius: 5px;
         }
-
         .accordion:hover {
             background-color: #ddd;
         }
-
         .accordion:after {
             content: '\002B';
             color: #777;
@@ -198,11 +238,9 @@
             float: right;
             margin-left: 5px;
         }
-
         .active:after {
             content: "\2212";
         }
-
         .panel {
             padding: 0 18px;
             background-color: white;
@@ -212,57 +250,36 @@
             border-radius: 5px;
             margin-bottom: 10px;
         }
-
         .panel-content {
             padding: 15px 0;
             color: #555;
             line-height: 1.6;
         }
-
-        .about-image {
-            flex: 1;
-            height: 500px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
         /* Contact Section */
         .contact {
             height: 100vh;
             padding: 100px 100px 50px;
             background: white;
         }
-
         .contact h2 {
             font-size: 3rem;
             text-align: center;
             margin-bottom: 50px;
             color: #333;
         }
-
         .contact-sections {
             display: flex;
             justify-content: space-between;
             gap: 50px;
         }
-
         .social-media, .other {
             flex: 1;
         }
-
         .social-media h3, .other h3 {
             font-size: 2rem;
             margin-bottom: 30px;
             color: #333;
         }
-
         .instagram-link {
             display: inline-block;
             background: #E4405F;
@@ -275,22 +292,18 @@
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(228, 64, 95, 0.3);
         }
-
         .instagram-link:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(228, 64, 95, 0.4);
         }
-
         .instagram-link i {
             margin-right: 10px;
         }
-
         .logo-links {
             display: flex;
             gap: 30px;
             margin-top: 20px;
         }
-
         .logo-link {
             width: 80px;
             height: 80px;
@@ -306,17 +319,14 @@
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-
         .logo-link:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
-
         .copy-link {
             background: #764ba2;
             cursor: pointer;
         }
-
         /* Quiz Page */
         .quiz-page {
             height: 100vh;
@@ -329,23 +339,19 @@
             text-align: center;
             padding: 20px;
         }
-
         .quiz-page.active {
             display: flex;
         }
-
         .quiz-content h1 {
             font-size: 3rem;
             margin-bottom: 40px;
         }
-
         .quiz-buttons {
             display: flex;
             gap: 30px;
             flex-wrap: wrap;
             justify-content: center;
         }
-
         .quiz-button {
             padding: 15px 30px;
             font-size: 1.1rem;
@@ -357,27 +363,22 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             min-width: 150px;
         }
-
         .yes-button {
             background: #4CAF50;
             color: white;
         }
-
         .no-button {
             background: #f44336;
             color: white;
         }
-
         .nav-button-style {
             background: #667eea;
             color: white;
         }
-
         .quiz-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
-
         /* Events Page */
         .events-page {
             height: 100vh;
@@ -391,23 +392,19 @@
             padding: 20px;
             overflow-y: auto;
         }
-
         .events-page.active {
             display: flex;
         }
-
         .events-content h1 {
             font-size: 3rem;
             margin-bottom: 40px;
         }
-
         .events-buttons {
             display: flex;
             gap: 30px;
             flex-wrap: wrap;
             justify-content: center;
         }
-
         .event-button {
             padding: 15px 30px;
             font-size: 1.1rem;
@@ -423,43 +420,35 @@
             text-align: center;
             text-decoration: none;
         }
-
         .event-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
-
         /* Color-coded buttons */
         .yellow-button {
             background: #FFD700;
             color: #333;
         }
-
         .grey-button {
             background: #808080;
             color: white;
         }
-
         .dark-green-button {
             background: #006400;
             color: white;
         }
-
         .blue-button {
             background: #1E90FF;
             color: white;
         }
-
         .red-button {
             background: #DC143C;
             color: white;
         }
-
         .light-green-button {
             background: #90EE90;
             color: #333;
         }
-
         /* Content Pages */
         .content-page {
             height: 100vh;
@@ -473,23 +462,19 @@
             padding: 20px;
             overflow-y: auto;
         }
-
         .content-page.active {
             display: flex;
         }
-
         .content-page h1 {
             font-size: 3rem;
             margin-bottom: 40px;
         }
-
         .content-page p {
             font-size: 1.5rem;
             margin-bottom: 30px;
             max-width: 800px;
             color: white;
         }
-
         /* Video container */
         .video-container {
             position: relative;
@@ -498,7 +483,6 @@
             height: 0;
             margin: 20px auto;
         }
-
         .video-container iframe {
             position: absolute;
             top: 0;
@@ -507,7 +491,6 @@
             height: 100%;
             border-radius: 10px;
         }
-
         /* Back Button */
         .back-button {
             position: fixed;
@@ -524,12 +507,10 @@
             z-index: 100;
             display: none;
         }
-
         .back-button:hover {
             background: #5a6fd8;
             transform: translateY(-2px);
         }
-
         /* Scroll indicator */
         .scroll-indicator {
             position: absolute;
@@ -538,20 +519,17 @@
             transform: translateX(-50%);
             animation: bounce 2s infinite;
         }
-
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
             40% {transform: translateY(-20px) translateX(-50%);}
             60% {transform: translateY(-10px) translateX(-50%);}
         }
-
         .scroll-text {
             color: white;
             margin-bottom: 10px;
             text-align: center;
             cursor: pointer;
         }
-
         .scroll-arrow {
             width: 30px;
             height: 30px;
@@ -561,33 +539,13 @@
             margin: 0 auto;
             cursor: pointer;
         }
-
         .up-arrow {
             transform: rotate(45deg);
         }
-
         .down-arrow {
             transform: rotate(225deg);
         }
-
         /* Calendar */
-        .calendar-page {
-            height: 100vh;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .calendar-page.active {
-            display: flex;
-        }
-
         .calendar-container {
             width: 90%;
             max-width: 1200px;
@@ -600,19 +558,16 @@
             overflow-y: auto;
             max-height: 80vh;
         }
-
         .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
-
         .calendar-title {
             font-size: 2rem;
             color: #333;
         }
-
         .edit-button {
             background: #667eea;
             color: white;
@@ -622,46 +577,37 @@
             cursor: pointer;
             font-weight: bold;
         }
-
         .edit-button:hover {
             background: #5a6fd8;
         }
-
         #calendar {
             margin: 20px 0;
         }
-
         .fc .fc-toolbar-title {
             font-size: 1.5rem;
         }
-
         .fc .fc-button {
             background: #667eea;
             border: none;
             color: white;
             padding: 5px 10px;
         }
-
         .fc .fc-button:hover {
             background: #5a6fd8;
         }
-
         .fc .fc-button-primary:not(:disabled).fc-button-active {
             background: #5a6fd8;
         }
-
         .slides-section {
             margin-top: 50px;
             width: 90%;
             max-width: 1000px;
         }
-
         .slides-title {
             font-size: 2rem;
             color: white;
             margin-bottom: 20px;
         }
-
         .slides-box {
             background: white;
             border-radius: 10px;
@@ -669,7 +615,6 @@
             min-height: 200px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-
         /* Form styles */
         .form-container {
             background: white;
@@ -679,12 +624,10 @@
             max-width: 500px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-
         .form-container h2,
         .form-container p {
             color: black;
         }
-
         .form-input {
             width: 100%;
             padding: 10px;
@@ -693,14 +636,12 @@
             border-radius: 5px;
             font-size: 1rem;
         }
-
         .form-buttons {
             display: flex;
             gap: 15px;
             justify-content: center;
             margin-top: 20px;
         }
-
         /* Password form */
         .password-form {
             background: white;
@@ -710,12 +651,10 @@
             max-width: 400px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-
         .password-form h2,
         .password-form p {
             color: black;
         }
-
         /* Resources Page */
         .resources-page {
             height: 100vh;
@@ -729,21 +668,46 @@
             padding: 20px;
             overflow-y: auto;
         }
-
         .resources-page.active {
             display: flex;
         }
-
+        .resources-content {
+            width: 90%;
+            max-width: 800px;
+        }
         .resources-content h1 {
             font-size: 3rem;
             margin-bottom: 40px;
         }
-
-        .resources-content p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            max-width: 800px;
-            color: white;
+        .resource-category {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .resource-category h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .resource-list {
+            list-style-type: none;
+        }
+        .resource-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .resource-list li:last-child {
+            border-bottom: none;
+        }
+        .resource-link {
+            color: #90ee90;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        .resource-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -755,35 +719,34 @@
             <div class="nav-button" id="rolePlayNav">
                 RolePlay
                 <div class="dropdown" id="roleplayDropdown">
-                    <button class="dropdown-button" id="rolePlayWhatBtn">What?</button>
-                    <button class="dropdown-button" id="rolePlayExampleBtn">Example</button>
-                    <button class="dropdown-button" id="rolePlayResourcesBtn">Resources</button>
+                    <button class="dropdown-button" onclick="showSubButtons('roleplay')">What?</button>
+                    <button class="dropdown-button" onclick="showRoleplayExample()">Example</button>
+                    <button class="dropdown-button" onclick="showResourcesPage()">Resources</button>
                 </div>
             </div>
             <div class="nav-button" id="writtenNav">
                 Written
                 <div class="dropdown" id="writtenDropdown">
-                    <button class="dropdown-button" id="writtenWhatBtn">What?</button>
-                    <button class="dropdown-button" id="writtenExampleBtn">Example</button>
-                    <button class="dropdown-button" id="writtenResourcesBtn">Resources</button>
+                    <button class="dropdown-button" onclick="showWrittenSubButtons('written')">What?</button>
+                    <button class="dropdown-button" onclick="showWrittenExample()">Example</button>
+                    <button class="dropdown-button" onclick="showResourcesPage()">Resources</button>
                 </div>
             </div>
             <div class="nav-button" id="otherNav">
                 Other
                 <div class="dropdown" id="otherDropdown">
                     <a href="https://www.deca.org/compete/stock-market-game" target="_blank" class="dropdown-button dark-green-button">Stock Market Game</a>
-                    <button class="dropdown-button" id="virtualBusinessBtn">Virtual Business Challenge</button>
+                    <button class="dropdown-button" onclick="showVirtualBusinessChallenges()">Virtual Business Challenge</button>
                 </div>
             </div>
             <div class="nav-button" id="eventsNav">
                 Events
                 <div class="dropdown" id="eventsDropdown">
-                    <button class="dropdown-button" id="calendarBtn">Calendar</button>
+                    <button class="dropdown-button" onclick="showEventsCalendar()">Calendar</button>
                 </div>
             </div>
         </div>
     </nav>
-
     <!-- Hero Section -->
     <section class="hero" id="homeSection">
         <h1>DECA</h1>
@@ -793,25 +756,24 @@
             <div class="scroll-text" id="keepScrolling">Keep scrolling</div>
         </div>
     </section>
-
     <!-- About Section -->
     <section class="about">
         <div class="about-content">
             <div class="about-text">
                 <h2>About</h2>
-                <button class="accordion" id="beTheOneBtn">Be the One!</button>
+                <button class="accordion" id="beTheOneButton">Be the One!</button>
                 <div class="panel" id="beTheOnePanel">
                     <div class="panel-content">
                         DECA is more than competitions, blazers and medallions. Joining DECA is the first step you can take towards achieving your goals and realizing your greatest potential. Your membership in DECA provides you the opportunity to participate in DECA's high school programs at the local, chartered association and international levels.
                     </div>
                 </div>
-                <button class="accordion" id="earnGlassBtn">Earn the DECA Glass!</button>
+                <button class="accordion" id="earnGlassButton">Earn the DECA Glass!</button>
                 <div class="panel" id="earnGlassPanel">
                     <div class="panel-content">
                         Put your classroom learning to the test by participating in DECA's Competitive Events Program. Choose a competitive event that best fits your career interest and skills. Demonstrate your knowledge of important career content, as well as your creativity, problem solving and presentation skills to a business professional. The potential to earn travel opportunities, recognition, scholarships and even DECA Glass for learning classroom content makes it all that more motivating. With a combination of nearly 60 role-play, prepared and online events, DECA offers a competitive event for every course and every member.
                     </div>
                 </div>
-                <button class="accordion" id="becomeLeaderBtn">Become an Emerging Leader!</button>
+                <button class="accordion" id="becomeLeaderButton">Become an Emerging Leader!</button>
                 <div class="panel" id="becomeLeaderPanel">
                     <div class="panel-content">
                         Learn how to provide effective leadership through goal setting, consensus building and project implementation, while demonstrating critical thinking and problem solving, communication and collaboration, and creativity and innovation.
@@ -825,7 +787,6 @@
             </div>
         </div>
     </section>
-
     <!-- Contact Section -->
     <section class="contact">
         <h2>Get In Touch</h2>
@@ -845,14 +806,12 @@
             </div>
         </div>
     </section>
-
     <!-- Quiz Page -->
     <div class="quiz-page" id="quizPage">
         <div class="quiz-content" id="quizContent">
             <!-- Content will be dynamically updated -->
         </div>
     </div>
-
     <!-- Events Page -->
     <div class="events-page" id="eventsPage">
         <div class="events-content">
@@ -865,15 +824,17 @@
             </div>
         </div>
     </div>
-
-    <!-- Calendar Page -->
-    <div class="calendar-page" id="calendarPage">
-        <div class="calendar-container">
-            <div class="calendar-header">
-                <div class="calendar-title">Events Calendar</div>
-                <button class="edit-button" id="editCalendarButton">Edit</button>
+    <!-- Events Calendar Page -->
+    <div class="content-page" id="eventsCalendarPage">
+        <div>
+            <h1>Events Calendar</h1>
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <div class="calendar-title">Event Calendar</div>
+                    <button class="edit-button" id="editCalendarButton">Edit</button>
+                </div>
+                <div id="calendar"></div>
             </div>
-            <div id="calendar"></div>
             <div class="slides-section">
                 <h2 class="slides-title">Slides From Past Meetings</h2>
                 <div class="slides-box">
@@ -882,7 +843,6 @@
             </div>
         </div>
     </div>
-
     <!-- Password Form -->
     <div class="content-page" id="passwordFormPage">
         <div class="password-form">
@@ -894,7 +854,6 @@
             </div>
         </div>
     </div>
-
     <!-- Not DECA Member Page -->
     <div class="content-page" id="notDecaMemberPage">
         <div class="form-container">
@@ -906,7 +865,6 @@
             </div>
         </div>
     </div>
-
     <!-- Gilbert's Room Page -->
     <div class="content-page" id="gilbertRoomPage">
         <div class="form-container">
@@ -915,15 +873,35 @@
             <button class="quiz-button nav-button-style" id="okayButton">Okay</button>
         </div>
     </div>
-
     <!-- Resources Page -->
     <div class="resources-page" id="resourcesPage">
         <div class="resources-content">
             <h1>Resources Page</h1>
-            <p>This is where resources would be displayed.</p>
+            <div class="resource-category">
+                <h2>RolePlay Resources</h2>
+                <ul class="resource-list">
+                    <li><a href="#" class="resource-link">Learn to Improvise</a></li>
+                    <li><a href="#" class="resource-link">Exam Prep</a></li>
+                    <li><a href="#" class="resource-link">Roleplay Prep</a></li>
+                </ul>
+            </div>
+            <div class="resource-category">
+                <h2>Written Resources</h2>
+                <ul class="resource-list">
+                    <li><a href="#" class="resource-link">Writing</a></li>
+                    <li><a href="#" class="resource-link">Presentation Prep</a></li>
+                </ul>
+            </div>
+            <div class="resource-category">
+                <h2>General Resources</h2>
+                <ul class="resource-list">
+                    <li><a href="#" class="resource-link">DECA Guidelines</a></li>
+                    <li><a href="#" class="resource-link">Competition Tips</a></li>
+                    <li><a href="#" class="resource-link">Study Materials</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-
     <!-- Content Pages -->
     <div class="content-page" id="principlesPage">
         <div>
@@ -937,7 +915,6 @@
             </div>
         </div>
     </div>
-
     <div class="content-page" id="individualRoleplayPage">
         <div>
             <h1>Individual Roleplay Page</h1>
@@ -959,7 +936,6 @@
             </div>
         </div>
     </div>
-
     <div class="content-page" id="teamDecisionPage">
         <div>
             <h1>Team Decision Making Page</h1>
@@ -975,7 +951,6 @@
             </div>
         </div>
     </div>
-
     <div class="content-page" id="personalFinancialPage">
         <div>
             <h1>Personal Financial Literacy</h1>
@@ -984,7 +959,6 @@
             </div>
         </div>
     </div>
-
     <div class="content-page" id="businessOperationsPage">
         <div>
             <h1>Business Operations Research</h1>
@@ -997,7 +971,6 @@
             </div>
         </div>
     </div>
-
     <div class="content-page" id="projectManagementPage">
         <div>
             <h1>Project Management</h1>
@@ -1010,7 +983,6 @@
             </div>
         </div>
     </div>
-
     <div class="content-page" id="businessPlanPage">
         <div>
             <h1>Business Plan</h1>
@@ -1024,7 +996,6 @@
             </div>
         </div>
     </div>
-
     <div class="content-page" id="integratedMarketingPage">
         <div>
             <h1>Integrated Marketing Campaign</h1>
@@ -1035,7 +1006,6 @@
             </div>
         </div>
     </div>
-
     <div class="content-page" id="virtualBusinessPage">
         <div>
             <h1>Virtual Business Challenge</h1>
@@ -1051,7 +1021,6 @@
             </div>
         </div>
     </div>
-
     <div class="content-page" id="stockMarketPage">
         <div>
             <h1>Stock Market Game</h1>
@@ -1060,7 +1029,6 @@
             </div>
         </div>
     </div>
-
     <!-- Example Pages -->
     <div class="content-page" id="rolePlayExamplePage">
         <div>
@@ -1070,7 +1038,6 @@
             </div>
         </div>
     </div>
-
     <div class="content-page" id="writtenExamplePage">
         <div>
             <h1>Written Example Presentation</h1>
@@ -1079,43 +1046,65 @@
             </div>
         </div>
     </div>
-
     <div class="content-page" id="writtenDocumentPage">
         <div>
             <h1>Written Example Document</h1>
             <p>This is where the written example document would be displayed.</p>
         </div>
     </div>
-
     <!-- Back Button -->
     <button class="back-button" id="backButton">Back</button>
-
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
     <script>
         // Wait for DOM to load
         document.addEventListener('DOMContentLoaded', function() {
             // Keep track of page history
             let pageHistory = [];
-            
+            // Initialize FullCalendar
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+                    {
+                        title: 'DECA Meeting',
+                        start: '2023-12-05',
+                        end: '2023-12-05'
+                    },
+                    {
+                        title: 'Workshop',
+                        start: '2023-12-12',
+                        end: '2023-12-12'
+                    },
+                    {
+                        title: 'Competition',
+                        start: '2023-12-19',
+                        end: '2023-12-19'
+                    }
+                ]
+            });
+            calendar.render();
             // Logo click to go back to home
             document.getElementById('logo').addEventListener('click', function() {
                 showHomePage();
             });
-
             // Accordion functionality
-            const accordions = document.querySelectorAll('.accordion');
-            accordions.forEach(accordion => {
-                accordion.addEventListener('click', function() {
-                    this.classList.toggle('active');
+            const acc = document.getElementsByClassName("accordion");
+            for (let i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
                     const panel = this.nextElementSibling;
                     if (panel.style.maxHeight) {
                         panel.style.maxHeight = null;
                     } else {
-                        panel.style.maxHeight = panel.scrollHeight + 'px';
+                        panel.style.maxHeight = panel.scrollHeight + "px";
                     }
                 });
-            });
-
+            }
             // Start button functionality
             const startButton = document.getElementById('startButton');
             if (startButton) {
@@ -1129,92 +1118,25 @@
                     showDecaQuestion();
                 });
             }
-
-            // Navigation button clicks
-            document.getElementById('rolePlayWhatBtn').addEventListener('click', function() {
-                showRoleplayWhatPage();
-            });
-
-            document.getElementById('rolePlayExampleBtn').addEventListener('click', function() {
-                showRoleplayExamplePage();
-            });
-
-            document.getElementById('rolePlayResourcesBtn').addEventListener('click', function() {
-                showResourcesPage();
-            });
-
-            document.getElementById('writtenWhatBtn').addEventListener('click', function() {
-                showWrittenWhatPage();
-            });
-
-            document.getElementById('writtenExampleBtn').addEventListener('click', function() {
-                showWrittenExamplePage();
-            });
-
-            document.getElementById('writtenResourcesBtn').addEventListener('click', function() {
-                showResourcesPage();
-            });
-
-            document.getElementById('virtualBusinessBtn').addEventListener('click', function() {
-                showVirtualBusinessPage();
-            });
-
-            document.getElementById('calendarBtn').addEventListener('click', function() {
-                showCalendarPage();
-            });
-
             // Events page buttons
             document.getElementById('rolePlayButton').addEventListener('click', function() {
+                hideAllPages();
                 showRoleplayEventsPage();
+                showBackButton();
+                pageHistory.push('eventsPage');
             });
-
             document.getElementById('writtenButton').addEventListener('click', function() {
+                hideAllPages();
                 showWrittenEventsPage();
+                showBackButton();
+                pageHistory.push('eventsPage');
             });
-
             document.getElementById('otherButton').addEventListener('click', function() {
+                hideAllPages();
                 showOtherEventsPage();
-            });
-
-            // Calendar edit button
-            document.getElementById('editCalendarButton').addEventListener('click', function() {
-                hideAllPages();
-                document.getElementById('passwordFormPage').classList.add('active');
                 showBackButton();
-                pageHistory.push('calendarPage');
+                pageHistory.push('eventsPage');
             });
-
-            // Password form buttons
-            document.getElementById('submitPassword').addEventListener('click', function() {
-                const password = document.getElementById('passwordInput').value;
-                if (password === 'test12345') {
-                    alert('Password correct! You can now edit the calendar.');
-                    goBack();
-                } else {
-                    alert('Incorrect password. Please try again.');
-                }
-            });
-
-            document.getElementById('cancelPassword').addEventListener('click', function() {
-                goBack();
-            });
-
-            // Not DECA member buttons
-            document.getElementById('doneFormButton').addEventListener('click', function() {
-                hideAllPages();
-                document.getElementById('gilbertRoomPage').classList.add('active');
-                showBackButton();
-                pageHistory.push('notDecaMemberPage');
-            });
-
-            document.getElementById('okayButton').addEventListener('click', function() {
-                hideAllPages();
-                document.getElementById('quizPage').classList.add('active');
-                showBackButton();
-                pageHistory.push('gilbertRoomPage');
-                showQuestion('event');
-            });
-
             // Scroll functionality
             const upText = document.getElementById('upText');
             if (upText) {
@@ -1225,7 +1147,6 @@
                     });
                 });
             }
-
             const downText = document.getElementById('downText');
             if (downText) {
                 downText.addEventListener('click', function() {
@@ -1234,7 +1155,6 @@
                     });
                 });
             }
-
             // Copy text function for Logo 2
             const logo2 = document.getElementById('logo2');
             if (logo2) {
@@ -1247,16 +1167,83 @@
                     });
                 });
             }
-
             // Back button functionality
             document.getElementById('backButton').addEventListener('click', function() {
                 goBack();
             });
-
+            // Events navigation
+            document.getElementById('eventsNav').addEventListener('click', function() {
+                showEventsCalendar();
+                pageHistory.push('home');
+            });
+            // Calendar edit button
+            document.getElementById('editCalendarButton').addEventListener('click', function() {
+                hideAllPages();
+                document.getElementById('passwordFormPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('eventsCalendarPage');
+            });
+            // Password form buttons
+            document.getElementById('submitPassword').addEventListener('click', function() {
+                const password = document.getElementById('passwordInput').value;
+                if (password === 'test12345') {
+                    alert('Password correct! You can now edit the calendar.');
+                    goBack();
+                } else {
+                    alert('Incorrect password. Please try again.');
+                }
+            });
+            document.getElementById('cancelPassword').addEventListener('click', function() {
+                goBack();
+            });
+            // Not DECA member buttons
+            document.getElementById('doneFormButton').addEventListener('click', function() {
+                hideAllPages();
+                document.getElementById('gilbertRoomPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('notDecaMemberPage');
+            });
+            document.getElementById('okayButton').addEventListener('click', function() {
+                hideAllPages();
+                document.getElementById('quizPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('gilbertRoomPage');
+                showQuestion('event');
+            });
+            // Dropdown positioning
+            function positionDropdowns() {
+                const roleplayDropdown = document.getElementById('roleplayDropdown');
+                const writtenDropdown = document.getElementById('writtenDropdown');
+                const otherDropdown = document.getElementById('otherDropdown');
+                const eventsDropdown = document.getElementById('eventsDropdown');
+                const windowWidth = window.innerWidth;
+                // Position main dropdowns
+                if (windowWidth > 768) {
+                    roleplayDropdown.classList.add('left-dropdown');
+                    writtenDropdown.classList.add('left-dropdown');
+                    otherDropdown.classList.add('left-dropdown');
+                    eventsDropdown.classList.add('left-dropdown');
+                    roleplayDropdown.classList.remove('right-dropdown');
+                    writtenDropdown.classList.remove('right-dropdown');
+                    otherDropdown.classList.remove('right-dropdown');
+                    eventsDropdown.classList.remove('right-dropdown');
+                } else {
+                    roleplayDropdown.classList.add('right-dropdown');
+                    writtenDropdown.classList.add('right-dropdown');
+                    otherDropdown.classList.add('right-dropdown');
+                    eventsDropdown.classList.add('right-dropdown');
+                    roleplayDropdown.classList.remove('left-dropdown');
+                    writtenDropdown.classList.remove('left-dropdown');
+                    otherDropdown.classList.remove('left-dropdown');
+                    eventsDropdown.classList.remove('left-dropdown');
+                }
+            }
+            // Call on load and resize
+            positionDropdowns();
+            window.addEventListener('resize', positionDropdowns);
             // Quiz functionality
             const quizContent = document.getElementById('quizContent');
             let currentQuestion = 'event';
-
             function showDecaQuestion() {
                 quizContent.innerHTML = `
                     <h1>Are You A Part of Deca?</h1>
@@ -1275,11 +1262,9 @@
                     pageHistory.push('quizPage');
                 });
             }
-
             function showQuestion(questionType) {
                 currentQuestion = questionType;
                 quizContent.innerHTML = '';
-
                 switch(questionType) {
                     case 'event':
                         quizContent.innerHTML = `
@@ -1298,7 +1283,6 @@
                             showQuestion('improvise');
                         });
                         break;
-
                     case 'improvise':
                         quizContent.innerHTML = `
                             <h1>Do you like to improvise?</h1>
@@ -1314,7 +1298,6 @@
                             showQuestion('preferences');
                         });
                         break;
-
                     case 'workAlone':
                         quizContent.innerHTML = `
                             <h1>Do you like to work alone or with a partner?</h1>
@@ -1331,7 +1314,6 @@
                             pageHistory.push('quizPage');
                         });
                         break;
-
                     case 'firstYear':
                         quizContent.innerHTML = `
                             <h1>Are you a first year member?</h1>
@@ -1349,7 +1331,6 @@
                             pageHistory.push('quizPage');
                         });
                         break;
-
                     case 'preferences':
                         quizContent.innerHTML = `
                             <h1>Which of these do you prefer?</h1>
@@ -1362,7 +1343,6 @@
                                 <button class="quiz-button nav-button-style" id="simulation">Test Your Business Skills in a Simulation Game</button>
                             </div>
                         `;
-                        
                         document.getElementById('eventPlanning').addEventListener('click', function() {
                             showResult('projectManagementPage');
                             pageHistory.push('quizPage');
@@ -1387,7 +1367,6 @@
                             pageHistory.push('quizPage');
                         });
                         break;
-
                     case 'marketingType':
                         quizContent.innerHTML = `
                             <h1>Which type of marketing?</h1>
@@ -1407,13 +1386,11 @@
                         break;
                 }
             }
-
             function showResult(pageId) {
                 hideAllPages();
                 document.getElementById(pageId).classList.add('active');
                 showBackButton();
             }
-
             function hideAllPages() {
                 document.getElementById('quizPage').classList.remove('active');
                 document.getElementById('eventsPage').classList.remove('active');
@@ -1430,21 +1407,12 @@
                 document.getElementById('rolePlayExamplePage').classList.remove('active');
                 document.getElementById('writtenExamplePage').classList.remove('active');
                 document.getElementById('writtenDocumentPage').classList.remove('active');
-                document.getElementById('calendarPage').classList.remove('active');
+                document.getElementById('eventsCalendarPage').classList.remove('active');
                 document.getElementById('passwordFormPage').classList.remove('active');
                 document.getElementById('notDecaMemberPage').classList.remove('active');
                 document.getElementById('gilbertRoomPage').classList.remove('active');
                 document.getElementById('resourcesPage').classList.remove('active');
-                document.getElementById('roleplayEventsPage').classList.remove('active');
-                document.getElementById('writtenEventsPage').classList.remove('active');
-                document.getElementById('otherEventsPage').classList.remove('active');
-                document.getElementById('roleplayWhatPage').classList.remove('active');
-                document.getElementById('writtenWhatPage').classList.remove('active');
-                document.getElementById('roleplayExamplePage').classList.remove('active');
-                document.getElementById('writtenExamplePage').classList.remove('active');
-                document.getElementById('resourcesPage').classList.remove('active');
             }
-
             function showHomePage() {
                 hideAllPages();
                 document.getElementById('homeSection').style.display = 'flex';
@@ -1453,18 +1421,14 @@
                 document.getElementById('backButton').style.display = 'none';
                 pageHistory = [];
             }
-
             function showBackButton() {
                 document.getElementById('backButton').style.display = 'block';
             }
-
             function goBack() {
                 if (pageHistory.length > 0) {
                     const previousPage = pageHistory.pop();
-                    
                     // Hide all pages
                     hideAllPages();
-                    
                     // Show the previous page
                     if (previousPage === 'home') {
                         showHomePage();
@@ -1476,187 +1440,168 @@
                     showHomePage();
                 }
             }
-
-            // Show event buttons when "What?" is clicked
-            function showRoleplayWhatPage() {
+            // Show sub buttons based on category
+            window.showSubButtons = function(category) {
                 hideAllPages();
-                document.getElementById('roleplayWhatPage').classList.add('active');
+                document.getElementById('homeSection').style.display = 'none';
+                document.querySelector('.about').style.display = 'none';
+                document.querySelector('.contact').style.display = 'none';
+                const eventsPage = document.getElementById('eventsPage');
+                const eventsContent = document.querySelector('.events-content');
+                eventsPage.classList.add('active');
                 showBackButton();
-                pageHistory.push('home');
-            }
-
-            function showWrittenWhatPage() {
-                hideAllPages();
-                document.getElementById('writtenWhatPage').classList.add('active');
-                showBackButton();
-                pageHistory.push('home');
-            }
-
-            // Show example pages
-            function showRoleplayExamplePage() {
-                hideAllPages();
-                document.getElementById('rolePlayExamplePage').classList.add('active');
-                showBackButton();
-                pageHistory.push('home');
-            }
-
-            function showWrittenExamplePage() {
-                hideAllPages();
-                document.getElementById('writtenExamplePage').classList.add('active');
-                showBackButton();
-                pageHistory.push('home');
-            }
-
-            // Show resources page
-            function showResourcesPage() {
-                hideAllPages();
-                document.getElementById('resourcesPage').classList.add('active');
-                showBackButton();
-                pageHistory.push('home');
-            }
-
-            // Events calendar
-            function showCalendarPage() {
-                hideAllPages();
-                document.getElementById('calendarPage').classList.add('active');
-                showBackButton();
-                pageHistory.push('home');
-                initializeCalendar();
-            }
-
-            // Initialize FullCalendar
-            function initializeCalendar() {
-                var calendarEl = document.getElementById('calendar');
-                if (calendarEl) {
-                    var calendar = new FullCalendar.Calendar(calendarEl, {
-                        initialView: 'dayGridMonth',
-                        headerToolbar: {
-                            left: 'prev,next today',
-                            center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                        },
-                        events: [
-                            {
-                                title: 'DECA Meeting',
-                                start: '2023-12-05',
-                                end: '2023-12-05'
-                            },
-                            {
-                                title: 'Workshop',
-                                start: '2023-12-12',
-                                end: '2023-12-12'
-                            },
-                            {
-                                title: 'Competition',
-                                start: '2023-12-19',
-                                end: '2023-12-19'
-                            }
-                        ]
-                    });
-                    calendar.render();
+                let buttonsHTML = '';
+                switch(category) {
+                    case 'roleplay':
+                        buttonsHTML = `
+                            <h1>RolePlay</h1>
+                            <div class="events-buttons">
+                                <button class="event-button" onclick="showRoleplayEvents()">What?</button>
+                                <button class="event-button" onclick="showRoleplayExample()">Example</button>
+                                <button class="event-button" onclick="showResourcesPage()">Resources</button>
+                            </div>
+                        `;
+                        break;
                 }
+                eventsContent.innerHTML = buttonsHTML;
             }
-
-            // Show events pages
-            function showRoleplayEventsPage() {
+            window.showWrittenSubButtons = function(category) {
                 hideAllPages();
+                document.getElementById('homeSection').style.display = 'none';
+                document.querySelector('.about').style.display = 'none';
+                document.querySelector('.contact').style.display = 'none';
                 const eventsPage = document.getElementById('eventsPage');
-                eventsPage.innerHTML = `
-                    <div class="events-content">
-                        <h1>RolePlay Events</h1>
-                        <div class="events-buttons">
-                            <button class="event-button" onclick="showRoleplayWhatPage()">What?</button>
-                            <button class="event-button" onclick="showRoleplayExamplePage()">Example</button>
-                            <button class="event-button" onclick="showResourcesPage()">Resources</button>
-                        </div>
-                    </div>
-                `;
+                const eventsContent = document.querySelector('.events-content');
                 eventsPage.classList.add('active');
                 showBackButton();
-                pageHistory.push('home');
+                let buttonsHTML = '';
+                switch(category) {
+                    case 'written':
+                        buttonsHTML = `
+                            <h1>Written</h1>
+                            <div class="events-buttons">
+                                <button class="event-button" onclick="showWrittenEvents()">What?</button>
+                                <button class="event-button" onclick="showWrittenExample()">Example</button>
+                                <button class="event-button" onclick="showResourcesPage()">Resources</button>
+                            </div>
+                        `;
+                        break;
+                }
+                eventsContent.innerHTML = buttonsHTML;
             }
-
-            function showWrittenEventsPage() {
-                hideAllPages();
-                const eventsPage = document.getElementById('eventsPage');
-                eventsPage.innerHTML = `
-                    <div class="events-content">
-                        <h1>Written Events</h1>
-                        <div class="events-buttons">
-                            <button class="event-button" onclick="showWrittenWhatPage()">What?</button>
-                            <button class="event-button" onclick="showWrittenExamplePage()">Example</button>
-                            <button class="event-button" onclick="showResourcesPage()">Resources</button>
-                        </div>
-                    </div>
-                `;
-                eventsPage.classList.add('active');
-                showBackButton();
-                pageHistory.push('home');
-            }
-
-            function showOtherEventsPage() {
-                hideAllPages();
-                const eventsPage = document.getElementById('eventsPage');
-                eventsPage.innerHTML = `
-                    <div class="events-content">
-                        <h1>Other Events</h1>
-                        <div class="events-buttons">
-                            <a href="https://www.deca.org/compete/stock-market-game" target="_blank" class="event-button dark-green-button">Stock Market Game</a>
-                            <button class="event-button" onclick="showVirtualBusinessPage()">Virtual Business Challenge</button>
-                        </div>
-                    </div>
-                `;
-                eventsPage.classList.add('active');
-                showBackButton();
-                pageHistory.push('home');
-            }
-
-            function showVirtualBusinessPage() {
-                hideAllPages();
-                document.getElementById('virtualBusinessPage').classList.add('active');
-                showBackButton();
-                pageHistory.push('home');
-            }
-
-            // Create additional pages
-            const roleplayWhatPage = document.createElement('div');
-            roleplayWhatPage.className = 'content-page';
-            roleplayWhatPage.id = 'roleplayWhatPage';
-            roleplayWhatPage.innerHTML = `
-                <div>
-                    <h1>RolePlay Events - What?</h1>
+            // Show event buttons when "What?" is clicked
+            window.showRoleplayEvents = function() {
+                const eventsContent = document.querySelector('.events-content');
+                eventsContent.innerHTML = `
+                    <h1>RolePlay Events</h1>
                     <div class="events-buttons">
                         <button class="event-button" onclick="showPage('principlesPage')">Principles Events Page</button>
                         <button class="event-button" onclick="showPage('individualRoleplayPage')">Individual Roleplay Page</button>
                         <button class="event-button" onclick="showPage('teamDecisionPage')">Team Decision Making Page</button>
                         <a href="https://www.deca.org/compete/personal-financial-literacy" target="_blank" class="event-button light-green-button">Personal Financial Literacy</a>
                     </div>
-                </div>
-            `;
-            document.body.appendChild(roleplayWhatPage);
-
-            const writtenWhatPage = document.createElement('div');
-            writtenWhatPage.className = 'content-page';
-            writtenWhatPage.id = 'writtenWhatPage';
-            writtenWhatPage.innerHTML = `
-                <div>
-                    <h1>Written Events - What?</h1>
+                `;
+                pageHistory.push('eventsPage');
+            }
+            window.showWrittenEvents = function() {
+                const eventsContent = document.querySelector('.events-content');
+                eventsContent.innerHTML = `
+                    <h1>Written Events</h1>
                     <div class="events-buttons">
                         <button class="event-button" onclick="showPage('businessOperationsPage')">Business Operations Research</button>
                         <button class="event-button" onclick="showPage('projectManagementPage')">Project Management</button>
                         <button class="event-button" onclick="showPage('businessPlanPage')">Business Plan</button>
                         <button class="event-button" onclick="showPage('integratedMarketingPage')">Integrated Marketing Campaign</button>
                     </div>
-                </div>
-            `;
-            document.body.appendChild(writtenWhatPage);
-
+                `;
+                pageHistory.push('eventsPage');
+            }
+            window.showVirtualBusinessChallenges = function() {
+                hideAllPages();
+                document.getElementById('virtualBusinessPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+            }
+            // Example pages
+            window.showRoleplayExample = function() {
+                hideAllPages();
+                document.getElementById('rolePlayExamplePage').classList.add('active');
+                showBackButton();
+                pageHistory.push('eventsPage');
+            }
+            window.showWrittenExample = function() {
+                hideAllPages();
+                document.getElementById('writtenExamplePage').classList.add('active');
+                showBackButton();
+                pageHistory.push('eventsPage');
+                // Add scroll listener for written example
+                setTimeout(function() {
+                    const writtenExamplePage = document.getElementById('writtenExamplePage');
+                    writtenExamplePage.addEventListener('scroll', function() {
+                        if (writtenExamplePage.scrollTop + writtenExamplePage.clientHeight >= writtenExamplePage.scrollHeight - 5) {
+                            // User has scrolled to bottom
+                            hideAllPages();
+                            document.getElementById('writtenDocumentPage').classList.add('active');
+                            pageHistory.push('writtenExamplePage');
+                        }
+                    });
+                }, 100);
+            }
+            // Resources page
+            window.showResourcesPage = function() {
+                hideAllPages();
+                document.getElementById('resourcesPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('eventsPage');
+            }
+            // Events calendar
+            window.showEventsCalendar = function() {
+                hideAllPages();
+                document.getElementById('eventsCalendarPage').classList.add('active');
+                showBackButton();
+                pageHistory.push('home');
+            }
             // Function to show a specific page
             window.showPage = function(pageId) {
                 hideAllPages();
                 document.getElementById(pageId).classList.add('active');
                 showBackButton();
-                pageHistory.push('home');
+                pageHistory.push('eventsPage');
+            }
+            // Show events pages from Events Page buttons
+            function showRoleplayEventsPage() {
+                const eventsContent = document.querySelector('.events-content');
+                eventsContent.innerHTML = `
+                    <h1>RolePlay Events</h1>
+                    <div class="events-buttons">
+                        <button class="event-button" onclick="showPage('principlesPage')">Principles Events Page</button>
+                        <button class="event-button" onclick="showPage('individualRoleplayPage')">Individual Roleplay Page</button>
+                        <button class="event-button" onclick="showPage('teamDecisionPage')">Team Decision Making Page</button>
+                        <a href="https://www.deca.org/compete/personal-financial-literacy" target="_blank" class="event-button light-green-button">Personal Financial Literacy</a>
+                    </div>
+                `;
+            }
+            function showWrittenEventsPage() {
+                const eventsContent = document.querySelector('.events-content');
+                eventsContent.innerHTML = `
+                    <h1>Written Events</h1>
+                    <div class="events-buttons">
+                        <button class="event-button" onclick="showPage('businessOperationsPage')">Business Operations Research</button>
+                        <button class="event-button" onclick="showPage('projectManagementPage')">Project Management</button>
+                        <button class="event-button" onclick="showPage('businessPlanPage')">Business Plan</button>
+                        <button class="event-button" onclick="showPage('integratedMarketingPage')">Integrated Marketing Campaign</button>
+                    </div>
+                `;
+            }
+            function showOtherEventsPage() {
+                const eventsContent = document.querySelector('.events-content');
+                eventsContent.innerHTML = `
+                    <h1>Other Events</h1>
+                    <div class="events-buttons">
+                        <a href="https://www.deca.org/compete/stock-market-game" target="_blank" class="event-button dark-green-button">Stock Market Game</a>
+                        <button class="event-button" onclick="showPage('virtualBusinessPage')">Virtual Business Challenge</button>
+                    </div>
+                `;
             }
         });
     </script>
