@@ -1527,13 +1527,17 @@
                 hideAllPages();
                 document.getElementById('rolePlayExamplePage').classList.add('active');
                 showBackButton();
-                pageHistory.push('eventsPage');
+                // Change from pageHistory.push('eventsPage'); to push 'home'
+                pageHistory.push('home'); // Indicate navigation came from the main home/navigation context
             }
+            
             window.showWrittenExample = function() {
                 hideAllPages();
                 document.getElementById('writtenExamplePage').classList.add('active');
                 showBackButton();
-                pageHistory.push('eventsPage');
+                // Change from pageHistory.push('eventsPage'); to push 'home'
+                pageHistory.push('home'); // Indicate navigation came from the main home/navigation context
+            
                 // Add scroll listener for written example
                 setTimeout(function() {
                     const writtenExamplePage = document.getElementById('writtenExamplePage');
@@ -1542,10 +1546,22 @@
                             // User has scrolled to bottom
                             hideAllPages();
                             document.getElementById('writtenDocumentPage').classList.add('active');
+                            // This transition *is* from writtenExamplePage, so push that
                             pageHistory.push('writtenExamplePage');
                         }
                     });
                 }, 100);
+            }
+            
+            // Resources page - Updated to push 'home' to history
+            window.showResourcesPage = function() {
+                hideAllPages();
+                document.getElementById('resourcesPage').classList.add('active');
+                showBackButton();
+                // Change from pageHistory.push('eventsPage'); to push 'home'
+                pageHistory.push('home'); // Indicate navigation came from the main home/navigation context
+            }
+
             }
             // Resources page
             window.showResourcesPage = function() {
