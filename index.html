@@ -23,7 +23,7 @@
             width: 100%;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            z-index: 1000;
+            z-index: 1000; /* Increased z-index to stay on top */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -50,27 +50,33 @@
             cursor: pointer;
             border-radius: 5px;
             transition: all 0.3s ease;
-            position: relative;
+            position: relative; /* Essential for hover */
         }
         .nav-button:hover {
             background: #667eea;
             color: white;
         }
-        /* Dropdown menus */
+
+        /* Dropdown menus - Main container */
         .dropdown {
             position: absolute;
             top: 100%;
+            left: 0; /* Align left by default */
             background: white;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
             padding: 10px 0;
-            display: none;
+            display: none; /* Hidden by default */
             z-index: 1001;
             min-width: 200px;
         }
+
+        /* Show dropdown on hover of the parent .nav-button */
         .nav-button:hover .dropdown {
             display: block;
         }
+
+        /* Dropdown buttons */
         .dropdown-button {
             display: block;
             width: 100%;
@@ -82,11 +88,21 @@
             color: #333;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none; /* For links */
+            box-sizing: border-box; /* Include padding in width */
         }
         .dropdown-button:hover {
             background: #f0f0f0;
         }
-        /* Resources dropdown */
+
+        /* Specific dropdown positioning for right-aligned items if needed */
+        /* .right-aligned .dropdown {
+            right: 0;
+            left: auto;
+        } */
+
+
+       /* Resources dropdown - Initially hidden, shown on hover of Resources button */
         .resources-dropdown {
             position: absolute;
             top: 0;
@@ -99,14 +115,18 @@
             min-width: 200px;
         }
         .left-dropdown {
-            left: 0;
+            left: 100%;
         }
         .right-dropdown {
-            right: 0;
+            right: 100%;
         }
+
+         /* Show resources dropdown on hover of the Resources button */
         .resources-button:hover .resources-dropdown {
             display: block;
         }
+
+
         /* Sub-dropdown menus */
         .sub-dropdown {
             position: absolute;
@@ -128,11 +148,13 @@
         .resources-button:hover .sub-dropdown {
             display: block;
         }
+
+        /* ... (rest of the CSS remains the same) ... */
         /* Hero Section */
         .hero {
             height: 100vh;
             width: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
                         url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
@@ -546,74 +568,65 @@
             transform: rotate(225deg);
         }
         /* Calendar */
-        .calendar-container {
-            width: 90%;
-            max-width: 1200px;
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-            color: #333;
-            overflow-y: auto;
-            max-height: 80vh;
-        }
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .calendar-title {
-            font-size: 2rem;
-            color: #333;
-        }
-        .edit-button {
-            background: #667eea;
+        /* Events Calendar Page - Make it full screen */
+        #eventsCalendarPage {
+            position: fixed; /* Cover viewport */
+            top: 70px; /* Start below the navbar (approx height) */
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 70px); /* Full height minus navbar */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px; /* Reduced padding */
+            overflow: hidden; /* Contain content */
+            z-index: 999; /* Below navbar */
         }
-        .edit-button:hover {
-            background: #5a6fd8;
+        #eventsCalendarPage.active {
+            display: flex;
+        }
+        /* Adjust calendar container for full screen */
+        .calendar-container {
+            width: 100%;
+            max-width: none;
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin: 5px 0;
+            color: #333;
+            overflow: hidden;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         #calendar {
-            margin: 20px 0;
+            flex-grow: 1;
+            overflow-y: auto;
         }
         .fc .fc-toolbar-title {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
         .fc .fc-button {
-            background: #667eea;
-            border: none;
-            color: white;
-            padding: 5px 10px;
-        }
-        .fc .fc-button:hover {
-            background: #5a6fd8;
-        }
-        .fc .fc-button-primary:not(:disabled).fc-button-active {
-            background: #5a6fd8;
+            padding: 4px 8px;
+            font-size: 0.85rem;
         }
         .slides-section {
-            margin-top: 50px;
-            width: 90%;
-            max-width: 1000px;
+            width: 100%;
+            max-width: none;
+            margin-top: 10px;
+            flex-shrink: 0;
         }
         .slides-title {
-            font-size: 2rem;
-            color: white;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
         }
         .slides-box {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            min-height: 200px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 8px;
+            min-height: 80px;
         }
         /* Form styles */
         .form-container {
@@ -716,37 +729,45 @@
     <nav class="navbar">
         <img src="https://placehold.co/120x40/667eea/ffffff?text=LOGO" alt="DECA Logo" class="logo" id="logo">
         <div class="nav-buttons">
+            <!-- RolePlay Dropdown -->
             <div class="nav-button" id="rolePlayNav">
                 RolePlay
-                <div class="dropdown" id="roleplayDropdown">
+                <div class="dropdown">
                     <button class="dropdown-button" onclick="showSubButtons('roleplay')">What?</button>
                     <button class="dropdown-button" onclick="showRoleplayExample()">Example</button>
                     <button class="dropdown-button" onclick="showResourcesPage()">Resources</button>
                 </div>
             </div>
+
+            <!-- Written Dropdown -->
             <div class="nav-button" id="writtenNav">
                 Written
-                <div class="dropdown" id="writtenDropdown">
-                    <button class="dropdown-button" onclick="showWrittenSubButtons('written')">What?</button>
+                <div class="dropdown">
+                     <button class="dropdown-button" onclick="showWrittenSubButtons('written')">What?</button>
                     <button class="dropdown-button" onclick="showWrittenExample()">Example</button>
                     <button class="dropdown-button" onclick="showResourcesPage()">Resources</button>
                 </div>
             </div>
+
+            <!-- Other Dropdown -->
             <div class="nav-button" id="otherNav">
                 Other
-                <div class="dropdown" id="otherDropdown">
+                <div class="dropdown">
                     <a href="https://www.deca.org/compete/stock-market-game" target="_blank" class="dropdown-button dark-green-button">Stock Market Game</a>
                     <button class="dropdown-button" onclick="showVirtualBusinessChallenges()">Virtual Business Challenge</button>
                 </div>
             </div>
+
+            <!-- Events Dropdown -->
             <div class="nav-button" id="eventsNav">
                 Events
-                <div class="dropdown" id="eventsDropdown">
+                <div class="dropdown">
                     <button class="dropdown-button" onclick="showEventsCalendar()">Calendar</button>
                 </div>
             </div>
         </div>
     </nav>
+
     <!-- Hero Section -->
     <section class="hero" id="homeSection">
         <h1>DECA</h1>
@@ -756,6 +777,7 @@
             <div class="scroll-text" id="keepScrolling">Keep scrolling</div>
         </div>
     </section>
+
     <!-- About Section -->
     <section class="about">
         <div class="about-content">
@@ -787,6 +809,7 @@
             </div>
         </div>
     </section>
+
     <!-- Contact Section -->
     <section class="contact">
         <h2>Get In Touch</h2>
@@ -806,12 +829,14 @@
             </div>
         </div>
     </section>
+
     <!-- Quiz Page -->
     <div class="quiz-page" id="quizPage">
         <div class="quiz-content" id="quizContent">
             <!-- Content will be dynamically updated -->
         </div>
     </div>
+
     <!-- Events Page -->
     <div class="events-page" id="eventsPage">
         <div class="events-content">
@@ -824,17 +849,15 @@
             </div>
         </div>
     </div>
-    <!-- Events Calendar Page -->
+
+    <!-- Events Calendar Page (Styles updated above for fullscreen) -->
     <div class="content-page" id="eventsCalendarPage">
-        <div>
-            <h1>Events Calendar</h1>
-            <div class="calendar-container">
-                <div class="calendar-header">
-                    <div class="calendar-title">Event Calendar</div>
-                    <button class="edit-button" id="editCalendarButton">Edit</button>
-                </div>
-                <div id="calendar"></div>
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <div class="calendar-title">Event Calendar</div>
+                <button class="edit-button" id="editCalendarButton">Edit</button>
             </div>
+            <div id="calendar"></div>
             <div class="slides-section">
                 <h2 class="slides-title">Slides From Past Meetings</h2>
                 <div class="slides-box">
@@ -843,6 +866,7 @@
             </div>
         </div>
     </div>
+
     <!-- Password Form -->
     <div class="content-page" id="passwordFormPage">
         <div class="password-form">
@@ -854,6 +878,7 @@
             </div>
         </div>
     </div>
+
     <!-- Not DECA Member Page -->
     <div class="content-page" id="notDecaMemberPage">
         <div class="form-container">
@@ -865,6 +890,7 @@
             </div>
         </div>
     </div>
+
     <!-- Gilbert's Room Page -->
     <div class="content-page" id="gilbertRoomPage">
         <div class="form-container">
@@ -873,6 +899,7 @@
             <button class="quiz-button nav-button-style" id="okayButton">Okay</button>
         </div>
     </div>
+
     <!-- Resources Page -->
     <div class="resources-page" id="resourcesPage">
         <div class="resources-content">
@@ -902,6 +929,7 @@
             </div>
         </div>
     </div>
+
     <!-- Content Pages -->
     <div class="content-page" id="principlesPage">
         <div>
@@ -1029,6 +1057,7 @@
             </div>
         </div>
     </div>
+
     <!-- Example Pages -->
     <div class="content-page" id="rolePlayExamplePage">
         <div>
@@ -1052,8 +1081,10 @@
             <p>This is where the written example document would be displayed.</p>
         </div>
     </div>
+
     <!-- Back Button -->
     <button class="back-button" id="backButton">Back</button>
+
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
     <script>
         // Wait for DOM to load
@@ -1239,8 +1270,9 @@
                 }
             }
             // Call on load and resize
-            positionDropdowns();
-            window.addEventListener('resize', positionDropdowns);
+            // positionDropdowns(); // Not needed anymore as dropdowns are direct children
+            // window.addEventListener('resize', positionDropdowns);
+
             // Quiz functionality
             const quizContent = document.getElementById('quizContent');
             let currentQuestion = 'event';
@@ -1465,7 +1497,7 @@
                 }
                 eventsContent.innerHTML = buttonsHTML;
             }
-            window.showWrittenSubButtons = function(category) {
+             window.showWrittenSubButtons = function(category) {
                 hideAllPages();
                 document.getElementById('homeSection').style.display = 'none';
                 document.querySelector('.about').style.display = 'none';
@@ -1503,7 +1535,7 @@
                 `;
                 pageHistory.push('eventsPage');
             }
-            window.showWrittenEvents = function() {
+             window.showWrittenEvents = function() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
                     <h1>Written Events</h1>
@@ -1522,53 +1554,48 @@
                 showBackButton();
                 pageHistory.push('home');
             }
-            // Example pages
+            // Example pages - Updated to push 'home' for direct nav from top bar
             window.showRoleplayExample = function() {
                 hideAllPages();
                 document.getElementById('rolePlayExamplePage').classList.add('active');
                 showBackButton();
-                // Change from pageHistory.push('eventsPage'); to push 'home'
+                // Change this line:
+                // pageHistory.push('eventsPage');
+                // To this:
                 pageHistory.push('home'); // Indicate navigation came from the main home/navigation context
             }
-            
+
             window.showWrittenExample = function() {
                 hideAllPages();
                 document.getElementById('writtenExamplePage').classList.add('active');
                 showBackButton();
-                // Change from pageHistory.push('eventsPage'); to push 'home'
+                // Change this line:
+                // pageHistory.push('eventsPage');
+                // To this:
                 pageHistory.push('home'); // Indicate navigation came from the main home/navigation context
-            
-                // Add scroll listener for written example
+
+                // Add scroll listener for written example (this part remains the same)
                 setTimeout(function() {
                     const writtenExamplePage = document.getElementById('writtenExamplePage');
                     writtenExamplePage.addEventListener('scroll', function() {
                         if (writtenExamplePage.scrollTop + writtenExamplePage.clientHeight >= writtenExamplePage.scrollHeight - 5) {
-                            // User has scrolled to bottom
                             hideAllPages();
                             document.getElementById('writtenDocumentPage').classList.add('active');
-                            // This transition *is* from writtenExamplePage, so push that
-                            pageHistory.push('writtenExamplePage');
+                            pageHistory.push('writtenExamplePage'); // This transition IS from writtenExamplePage
                         }
                     });
                 }, 100);
             }
-            
-            // Resources page - Updated to push 'home' to history
-            window.showResourcesPage = function() {
-                hideAllPages();
-                document.getElementById('resourcesPage').classList.add('active');
-                showBackButton();
-                // Change from pageHistory.push('eventsPage'); to push 'home'
-                pageHistory.push('home'); // Indicate navigation came from the main home/navigation context
-            }
 
-            }
-            // Resources page
+            // Resources page - Updated to push 'home' for direct nav from top bar
             window.showResourcesPage = function() {
                 hideAllPages();
                 document.getElementById('resourcesPage').classList.add('active');
                 showBackButton();
-                pageHistory.push('eventsPage');
+                // Change this line:
+                // pageHistory.push('eventsPage');
+                // To this:
+                pageHistory.push('home'); // Indicate navigation came from the main home/navigation context
             }
             // Events calendar
             window.showEventsCalendar = function() {
