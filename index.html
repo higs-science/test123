@@ -170,9 +170,18 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* hide overflow if Instagram embed doesn't fit */
+            overflow: hidden;
             padding: 10px;
         }
+        
+        .instagram-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
         
         .instagram-wrapper {
             width: 100%;
@@ -989,17 +998,18 @@
                 <p class="scroll-text" id="upText">Are you ready to join DECA? ⬆️</p>
                 <p class="scroll-text" id="downText">Need Help? ⬇️</p>
             </div>
-            <div class="about-image">
+           <div class="about-image">
               <div class="instagram-wrapper">
                 <blockquote class="instagram-media"
                     data-instgrm-captioned
                     data-instgrm-permalink="https://www.instagram.com/p/DJEt6FhxYMG/?utm_source=ig_embed&amp;utm_campaign=loading"
                     data-instgrm-version="14"
-                    style="margin: 0; width: 100%; height: 100%;">
+                    style="margin: auto;">
                 </blockquote>
               </div>
               <script async src="//www.instagram.com/embed.js"></script>
             </div>
+
 
         </div>
     </section>
