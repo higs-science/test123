@@ -491,21 +491,6 @@
             text-align: center;
             cursor: pointer;
         }
-        .scroll-arrow {
-            width: 30px;
-            height: 30px;
-            border: 2px solid white;
-            border-left: none;
-            border-top: none;
-            margin: 0 auto;
-            cursor: pointer;
-        }
-        .up-arrow {
-            transform: rotate(45deg);
-        }
-        .down-arrow {
-            transform: rotate(225deg);
-        }
         /* Calendar */
         #eventsCalendarPage {
             position: fixed;
@@ -1318,7 +1303,7 @@
         <div>
             <h1>Written Example Presentation</h1>
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/RaeG3fyhzI0" title="Written Example Presentation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Written Example Presentation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -1768,7 +1753,8 @@
             }
             
             function hideAllPages() {
-                const pages = document.querySelectorAll('.content-page, .quiz-page, .events-page, #eventsCalendarPage, #passwordFormPage, #homeSection, .about, .contact');
+                // Include resources pages in the selector
+                const pages = document.querySelectorAll('.content-page, .quiz-page, .events-page, .resources-page, #eventsCalendarPage, #passwordFormPage, #homeSection, .about, .contact');
                 pages.forEach(page => {
                     page.classList.remove('active');
                     if (page.id === 'homeSection' || page.classList.contains('about') || page.classList.contains('contact')) {
@@ -1912,7 +1898,7 @@
                 }, 100);
             }
             
-            // NEW: Resources pages - Direct navigation from top bar dropdowns
+            // Resources pages - Direct navigation from top bar dropdowns
             window.showResourcesRoleplayPage = function() {
                 hideAllPages();
                 document.getElementById('resourcesRoleplayPage').classList.add('active');
