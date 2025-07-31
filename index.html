@@ -295,7 +295,7 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
         .copy-link {
-            background: #764ba2;
+            background: #0275E0;
             cursor: pointer;
         }
         /* Quiz Page */
@@ -539,6 +539,7 @@
             background: rgba(0, 40, 80, 0.4); /* Inner calendar background */
             border-radius: 5px;
             padding: 10px;
+            height: 100%;
         }
         .fc .fc-toolbar-title {
             font-size: 1.2rem;
@@ -956,7 +957,7 @@
             background: #0072c6; /* Outlook blue */
         }
         .remind-logo {
-            background: #4682B4; /* Steel blue background */
+            background: #0275E0; /* Changed to #0275E0 */
             padding: 5px;
         }
         .remind-logo img {
@@ -969,7 +970,7 @@
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <img src="https://lh6.googleusercontent.com/ZAHEs2AmUPaP_NtN8x2SmP27w55SiG-rsWtljD7xvM_YbZ0iTSuR9ZsBj4G3rqAjVHvFw4SZId43S84jELM7H2BFUmTPnK9o3Rkr1Zk97Zb3eow08n9pLOq7NhxWCBB8ohUUgurH3tg=w16383" alt="DECA Logo" class="logo" id="logo">
+        <img src="https://cdn.prod.website-files.com/635c3c9aaccd75594c3f6c08/635c67f556f7d66bd5159f5a_deca-logo-blue.svg" alt="DECA Logo" class="logo" id="logo">
         <div class="nav-buttons">
             <!-- RolePlay Dropdown -->
             <div class="nav-button" id="rolePlayNav">
@@ -1389,32 +1390,27 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Keep track of page history
             let pageHistory = [];
-            
             // Initialize FullCalendar
             var calendarEl = document.getElementById('calendar');
             if (calendarEl) {
                 // Define events data
                 const eventsData = [
                     {
-                        title: 'INTRESTING MEETING FOR ALL LUNCHES IN AUDITORIUM',
-                        start: '2024-09-03',
-                        description: 'Auditorium',
-                        backgroundColor: '#4dabf7',
-                        borderColor: '#4dabf7'
+                        title: 'Interest Meeting (All Lunches)',
+                        start: '2025-09-03'
                     },
                     {
-                        title: 'PatTime Intrest Meeting in the Auditorium',
-                        start: '2024-09-10',
-                        description: 'Auditorium',
-                        backgroundColor: '#51cf66',
-                        borderColor: '#51cf66'
+                        title: 'Pattime Interest Meeting (Auditorium)',
+                        start: '2025-09-10'
                     },
                     {
                         title: 'Districts',
-                        start: '2024-12-01',
-                        description: '',
-                        backgroundColor: '#fcc419',
-                        borderColor: '#fcc419'
+                        start: '2025-12-01'
+                    },
+                    {
+                        title: 'States',
+                        start: '2026-02-26',
+                        end: '2026-03-01'
                     }
                 ];
                 var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -1427,16 +1423,15 @@
                     events: eventsData,
                     eventClick: function(info) {
                         alert(info.event.title + '\n' + info.event.extendedProps.description);
-                    }
+                    },
+                    initialDate: new Date() // Start on current date
                 });
                 calendar.render();
             }
-            
             // Logo click to go back to home
             document.getElementById('logo').addEventListener('click', function() {
                 showHomePage();
             });
-            
             // Accordion functionality
             const acc = document.getElementsByClassName("accordion");
             for (let i = 0; i < acc.length; i++) {
@@ -1450,7 +1445,6 @@
                     }
                 });
             }
-            
             // Start button functionality
             const startButton = document.getElementById('startButton');
             if (startButton) {
@@ -1464,7 +1458,6 @@
                     showDecaQuestion();
                 });
             }
-            
             // Events page buttons
             document.getElementById('rolePlayButton').addEventListener('click', function() {
                 hideAllPages();
@@ -1484,7 +1477,6 @@
                 showBackButton();
                 pageHistory.push('eventsPage');
             });
-            
             // Scroll functionality
             const upText = document.getElementById('upText');
             if (upText) {
@@ -1503,7 +1495,6 @@
                     });
                 });
             }
-            
             // Copy text function for Logo 2 (Remind)
             const logo2 = document.getElementById('logo2');
             if (logo2) {
@@ -1516,12 +1507,10 @@
                     });
                 });
             }
-            
             // Back button functionality
             document.getElementById('backButton').addEventListener('click', function() {
                 goBack();
             });
-            
             // Events navigation
             document.getElementById('eventsNav').addEventListener('click', function(event) {
                 if (event.target === this) {
@@ -1530,7 +1519,6 @@
                     pageHistory.push('home');
                 }
             });
-            
             // Password form buttons
             document.getElementById('submitPassword').addEventListener('click', function() {
                 const password = document.getElementById('passwordInput').value;
@@ -1548,7 +1536,6 @@
                 document.getElementById('eventsCalendarPage').classList.add('active');
                 showBackButton();
             });
-            
             // Not DECA member buttons
             document.getElementById('doneFormButton').addEventListener('click', function() {
                 hideAllPages();
@@ -1563,7 +1550,6 @@
                 pageHistory.push('gilbertRoomPage');
                 showQuestion('event');
             });
-            
             // Quiz functionality
             const quizContent = document.getElementById('quizContent');
             let currentQuestion = 'event';
@@ -1761,7 +1747,6 @@
                     showHomePage();
                 }
             }
-            
             // Direct navigation functions from top bar dropdowns
             window.showRoleplayEvents = function() {
                 hideAllPages();
@@ -1779,7 +1764,6 @@
                 `;
                 pageHistory.push('home');
             }
-            
             window.showWrittenEvents = function() {
                 hideAllPages();
                 document.getElementById('eventsPage').classList.add('active');
@@ -1796,14 +1780,12 @@
                 `;
                 pageHistory.push('home');
             }
-            
             window.showRoleplayExample = function() {
                 hideAllPages();
                 document.getElementById('rolePlayExamplePage').classList.add('active');
                 showBackButton();
                 pageHistory.push('home');
             }
-            
             window.showWrittenExample = function() {
                 hideAllPages();
                 document.getElementById('writtenExamplePage').classList.add('active');
@@ -1822,7 +1804,6 @@
                     });
                 }, 100);
             }
-            
             // Resources pages - Direct navigation from top bar dropdowns
             window.showResourcesRoleplayPage = function() {
                 hideAllPages();
@@ -1830,21 +1811,18 @@
                 showBackButton();
                 pageHistory.push('home');
             }
-            
             window.showResourcesWrittenPage = function() {
                 hideAllPages();
                 document.getElementById('resourcesWrittenPage').classList.add('active');
                 showBackButton();
                 pageHistory.push('home');
             }
-            
             window.showVirtualBusinessChallenges = function() {
                 hideAllPages();
                 document.getElementById('virtualBusinessPage').classList.add('active');
                 showBackButton();
                 pageHistory.push('home');
             }
-            
             // Events calendar
             window.showEventsCalendar = function() {
                 hideAllPages();
@@ -1852,7 +1830,6 @@
                 showBackButton();
                 pageHistory.push('home');
             }
-            
             // Password form
             window.showPasswordForm = function() {
                 hideAllPages();
@@ -1860,7 +1837,6 @@
                 showBackButton();
                 pageHistory.push('home');
             }
-            
             // Function to show a specific page
             window.showPage = function(pageId) {
                 hideAllPages();
@@ -1868,7 +1844,6 @@
                 showBackButton();
                 pageHistory.push('eventsPage');
             }
-            
             // Show events pages from Events Page buttons
             function showRoleplayEventsPage() {
                 const eventsContent = document.querySelector('.events-content');
@@ -1882,7 +1857,6 @@
                     </div>
                 `;
             }
-            
             function showWrittenEventsPage() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
@@ -1895,7 +1869,6 @@
                     </div>
                 `;
             }
-            
             function showOtherEventsPage() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
@@ -1906,10 +1879,8 @@
                     </div>
                 `;
             }
-            
             // Initialize by showing home sections
             showHomePage();
-            
             // Direct navigation functions
             window.showWrittenExampleDirect = function() {
                 hideAllPages();
@@ -1931,14 +1902,12 @@
                     writtenExamplePage.addEventListener('scroll', newListener);
                 }, 100);
             };
-            
             window.showResourcesWrittenPage = function() {
                 hideAllPages();
                 document.getElementById('resourcesWrittenPage').classList.add('active');
                 showBackButton();
                 pageHistory.push('home');
             };
-            
             window.showVirtualBusinessChallengesDirect = function() {
                 hideAllPages();
                 document.getElementById('virtualBusinessPage').classList.add('active');
