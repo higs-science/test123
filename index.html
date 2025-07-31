@@ -957,14 +957,12 @@
         }
         .remind-logo {
             background: #4682B4; /* Steel blue background */
-            padding: 0;
-            overflow: hidden;
+            padding: 5px;
         }
         .remind-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -977,7 +975,7 @@
             <div class="nav-button" id="rolePlayNav">
                 RolePlay
                 <div class="dropdown">
-                    <button class="dropdown-button" onclick="showSubButtons('roleplay')">What?</button>
+                    <button class="dropdown-button" onclick="showRoleplayEvents()">What?</button>
                     <button class="dropdown-button" onclick="showRoleplayExample()">Example</button>
                     <button class="dropdown-button" onclick="showResourcesRoleplayPage()">Resources</button>
                 </div>
@@ -986,7 +984,7 @@
             <div class="nav-button" id="writtenNav">
                 Written
                 <div class="dropdown">
-                    <button class="dropdown-button" onclick="showWrittenSubButtons('written')">What?</button>
+                    <button class="dropdown-button" onclick="showWrittenEvents()">What?</button>
                     <button class="dropdown-button" onclick="showWrittenExampleDirect()">Example</button>
                     <button class="dropdown-button" onclick="showResourcesWrittenPage()">Resources</button>
                 </div>
@@ -1004,7 +1002,6 @@
                 Events
                 <div class="dropdown">
                     <button class="dropdown-button" onclick="showEventsCalendar()">Calendar</button>
-                    <button class="dropdown-button" onclick="showPasswordForm()">Edit Calendar</button>
                 </div>
             </div>
         </div>
@@ -1062,8 +1059,10 @@
             <div class="other">
                 <h3>Other</h3>
                 <div class="logo-links">
-                    <a href="" target="_blank" class="logo-link">Logo 1</a>
-                    <a href="#" class="logo-link copy-link remind-logo" id="logo2">
+                    <a href="mailto:wgilbert@wcpss.net" target="_blank" class="logo-link email-logo">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="#" class="logo-link remind-logo copy-link" id="logo2">
                         <img src="https://1000logos.net/wp-content/uploads/2022/08/Remind-Symbol-500x281.png" alt="Remind Logo">
                     </a>
                 </div>
@@ -1505,7 +1504,7 @@
                 });
             }
             
-            // Copy text function for Logo 2
+            // Copy text function for Logo 2 (Remind)
             const logo2 = document.getElementById('logo2');
             if (logo2) {
                 logo2.addEventListener('click', function(e) {
@@ -1762,45 +1761,29 @@
                     showHomePage();
                 }
             }
-            // Show sub buttons based on category
-            window.showSubButtons = function(category) {
-                hideAllPages();
-                document.getElementById('homeSection').style.display = 'none';
-                document.querySelector('.about').style.display = 'none';
-                document.querySelector('.contact').style.display = 'none';
-                const eventsPage = document.getElementById('eventsPage');
-                const eventsContent = eventsPage.querySelector('.events-content');
-                eventsPage.classList.add('active');
-                showBackButton();
-                let buttonsHTML = '';
-                switch(category) {
-                    case 'roleplay':
-                       buttonsHTML = `<h1>RolePlay</h1><div class="events-buttons"><button class="event-button" onclick="showRoleplayEvents()">What?</button><button class="event-button" onclick="showRoleplayExample()">Example</button><button class="event-button" onclick="showResourcesRoleplayPage()">Resources</button></div>`;
-                        break;
-                    case 'written':
-                       buttonsHTML = `<h1>Written</h1><div class="events-buttons"><button class="event-button" onclick="showWrittenEvents()">What?</button><button class="event-button" onclick="showWrittenExample()">Example</button><button class="event-button" onclick="showResourcesWrittenPage()">Resources</button></div>`;
-                        break;
-                }
-                eventsContent.innerHTML = buttonsHTML;
-                pageHistory.push('home');
-            }
-            window.showWrittenSubButtons = function(category) {
-                showSubButtons(category);
-            }
+            
+            // Direct navigation functions from top bar dropdowns
             window.showRoleplayEvents = function() {
+                hideAllPages();
+                document.getElementById('eventsPage').classList.add('active');
+                showBackButton();
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
                     <h1>RolePlay Events</h1>
                     <div class="events-buttons">
-                        <button class="event-button" onclick="showPage('principlesPage')">Principles Events Page</button>
-                        <button class="event-button" onclick="showPage('individualRoleplayPage')">Individual Roleplay Page</button>
-                        <button class="event-button" onclick="showPage('teamDecisionPage')">Team Decision Making Page</button>
+                        <button class="event-button" onclick="showPage('principlesPage')">Principles Events</button>
+                        <button class="event-button" onclick="showPage('individualRoleplayPage')">Individual Roleplay</button>
+                        <button class="event-button" onclick="showPage('teamDecisionPage')">Team Decision Making</button>
                         <a href="https://www.deca.org/compete/personal-financial-literacy" target="_blank" class="event-button light-green-button">Personal Financial Literacy</a>
                     </div>
                 `;
-                pageHistory.push('eventsPage');
+                pageHistory.push('home');
             }
+            
             window.showWrittenEvents = function() {
+                hideAllPages();
+                document.getElementById('eventsPage').classList.add('active');
+                showBackButton();
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
                     <h1>Written Events</h1>
@@ -1811,15 +1794,16 @@
                         <button class="event-button" onclick="showPage('integratedMarketingPage')">Integrated Marketing Campaign</button>
                     </div>
                 `;
-                pageHistory.push('eventsPage');
+                pageHistory.push('home');
             }
-            // Direct navigation functions from top bar dropdowns
+            
             window.showRoleplayExample = function() {
                 hideAllPages();
                 document.getElementById('rolePlayExamplePage').classList.add('active');
                 showBackButton();
                 pageHistory.push('home');
             }
+            
             window.showWrittenExample = function() {
                 hideAllPages();
                 document.getElementById('writtenExamplePage').classList.add('active');
@@ -1838,6 +1822,7 @@
                     });
                 }, 100);
             }
+            
             // Resources pages - Direct navigation from top bar dropdowns
             window.showResourcesRoleplayPage = function() {
                 hideAllPages();
@@ -1845,18 +1830,21 @@
                 showBackButton();
                 pageHistory.push('home');
             }
+            
             window.showResourcesWrittenPage = function() {
                 hideAllPages();
                 document.getElementById('resourcesWrittenPage').classList.add('active');
                 showBackButton();
                 pageHistory.push('home');
             }
+            
             window.showVirtualBusinessChallenges = function() {
                 hideAllPages();
                 document.getElementById('virtualBusinessPage').classList.add('active');
                 showBackButton();
                 pageHistory.push('home');
             }
+            
             // Events calendar
             window.showEventsCalendar = function() {
                 hideAllPages();
@@ -1864,6 +1852,7 @@
                 showBackButton();
                 pageHistory.push('home');
             }
+            
             // Password form
             window.showPasswordForm = function() {
                 hideAllPages();
@@ -1871,6 +1860,7 @@
                 showBackButton();
                 pageHistory.push('home');
             }
+            
             // Function to show a specific page
             window.showPage = function(pageId) {
                 hideAllPages();
@@ -1878,19 +1868,21 @@
                 showBackButton();
                 pageHistory.push('eventsPage');
             }
+            
             // Show events pages from Events Page buttons
             function showRoleplayEventsPage() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
                     <h1>RolePlay Events</h1>
                     <div class="events-buttons">
-                        <button class="event-button" onclick="showPage('principlesPage')">Principles Events Page</button>
-                        <button class="event-button" onclick="showPage('individualRoleplayPage')">Individual Roleplay Page</button>
-                        <button class="event-button" onclick="showPage('teamDecisionPage')">Team Decision Making Page</button>
+                        <button class="event-button" onclick="showPage('principlesPage')">Principles Events</button>
+                        <button class="event-button" onclick="showPage('individualRoleplayPage')">Individual Roleplay</button>
+                        <button class="event-button" onclick="showPage('teamDecisionPage')">Team Decision Making</button>
                         <a href="https://www.deca.org/compete/personal-financial-literacy" target="_blank" class="event-button light-green-button">Personal Financial Literacy</a>
                     </div>
                 `;
             }
+            
             function showWrittenEventsPage() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
@@ -1903,6 +1895,7 @@
                     </div>
                 `;
             }
+            
             function showOtherEventsPage() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
@@ -1913,8 +1906,10 @@
                     </div>
                 `;
             }
+            
             // Initialize by showing home sections
             showHomePage();
+            
             // Direct navigation functions
             window.showWrittenExampleDirect = function() {
                 hideAllPages();
@@ -1936,12 +1931,14 @@
                     writtenExamplePage.addEventListener('scroll', newListener);
                 }, 100);
             };
+            
             window.showResourcesWrittenPage = function() {
                 hideAllPages();
                 document.getElementById('resourcesWrittenPage').classList.add('active');
                 showBackButton();
                 pageHistory.push('home');
             };
+            
             window.showVirtualBusinessChallengesDirect = function() {
                 hideAllPages();
                 document.getElementById('virtualBusinessPage').classList.add('active');
