@@ -174,7 +174,6 @@
             overflow: hidden;
             padding: 10px;
         }
-        
         .about-img {
             width: auto;
             height: auto;
@@ -185,8 +184,6 @@
             border: 1.5px solid rgba(255, 255, 255, 0.7); /* thinner border */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-
-        
                 /* Accordion */
         .accordion {
             background-color: #f1f1f1;
@@ -944,6 +941,31 @@
                 min-width: 150px;
             }
         }
+        /* Resources page specific styles */
+        .resources-page .panel-content {
+            color: #fff; /* Default text color */
+        }
+        .resources-page .panel:first-child .panel-content {
+            color: #4dabf7; /* Blue text for Exam Prep */
+        }
+        .resources-page .panel:last-child .panel-content {
+            color: #000; /* Black text for How to Find Roleplays */
+        }
+        /* Email and Remind logos */
+        .email-logo {
+            background: #0072c6; /* Outlook blue */
+        }
+        .remind-logo {
+            background: #4682B4; /* Steel blue background */
+            padding: 0;
+            overflow: hidden;
+        }
+        .remind-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
@@ -1025,8 +1047,6 @@
            <div class="about-image">
               <img src="https://i.imgur.com/m51SaAa.jpeg" alt="About Image" class="about-img" />
             </div>
-
-
         </div>
     </section>
     <!-- Contact Section -->
@@ -1043,7 +1063,9 @@
                 <h3>Other</h3>
                 <div class="logo-links">
                     <a href="" target="_blank" class="logo-link">Logo 1</a>
-                    <a href="#" class="logo-link copy-link" id="logo2">Logo 2</a>
+                    <a href="#" class="logo-link copy-link remind-logo" id="logo2">
+                        <img src="https://1000logos.net/wp-content/uploads/2022/08/Remind-Symbol-500x281.png" alt="Remind Logo">
+                    </a>
                 </div>
             </div>
         </div>
@@ -1098,80 +1120,78 @@
         </div>
     </div>
     <!-- Resources Roleplay Page -->
-   <div class="resources-content">
-    <h1>Resources - Role Play</h1>
-    
-    <!-- Exam Prep Accordion -->
-    <button class="accordion">Exam Prep</button>
-    <div class="panel">
-        <div class="resources-columns">
-            <div class="resource-column">
-                <h3>Business Administration CORE</h3>
-                <ul class="resource-list">
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/23_sample_bacore.pdf" target="_blank" class="resource-link">2023 Sample</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/2024_states_bacore.pdf" target="_blank" class="resource-link">2024 States</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
-                </ul>
-                
-                <h3>Marketing</h3>
-                <ul class="resource-list">
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_mkt.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_state_mkt.pdf" target="_blank" class="resource-link">2024 States</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc_mkt.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
-                </ul>
-                
-                <h3>Finance</h3>
-                <ul class="resource-list">
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_fin.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/23_state_fin.pdf" target="_blank" class="resource-link">2023 States</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc_fin.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
-                </ul>
+    <div class="resources-page" id="resourcesRoleplayPage">
+        <div class="resources-content">
+            <h1>Resources - Role Play</h1>
+            <!-- Exam Prep Accordion -->
+            <button class="accordion">Exam Prep</button>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="resources-columns">
+                        <div class="resource-column">
+                            <h3>Business Administration CORE</h3>
+                            <ul class="resource-list">
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/23_sample_bacore.pdf" target="_blank" class="resource-link">2023 Sample</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/2024_states_bacore.pdf" target="_blank" class="resource-link">2024 States</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
+                            </ul>
+                            <h3>Marketing</h3>
+                            <ul class="resource-list">
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_mkt.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_state_mkt.pdf" target="_blank" class="resource-link">2024 States</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc_mkt.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
+                            </ul>
+                            <h3>Finance</h3>
+                            <ul class="resource-list">
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_fin.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/23_state_fin.pdf" target="_blank" class="resource-link">2023 States</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc_fin.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
+                            </ul>
+                        </div>
+                        <div class="resource-column">
+                            <h3>Business Management + Administration</h3>
+                            <ul class="resource-list">
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_bma.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/22_state_bma.pdf" target="_blank" class="resource-link">2024 States</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/23_icdc_bma.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
+                            </ul>
+                            <h3>Hospitality + Tourism</h3>
+                            <ul class="resource-list">
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_hsp.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_state_hsp.pdf" target="_blank" class="resource-link">2024 States</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/23_icdc_hsp.pdf" target="_blank" class="resource-link">2023 ICDC</a></li>
+                            </ul>
+                            <h3>Entrepreneurship</h3>
+                            <ul class="resource-list">
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_ent.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/21_state_ent.pdf" target="_blank" class="resource-link">2021 States</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc_ent.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
+                            </ul>
+                            <h3>Personal Financial Literacy</h3>
+                            <ul class="resource-list">
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_pfl.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_state_pfl.pdf" target="_blank" class="resource-link">2024 States</a></li>
+                                <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc_pfl.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <div class="resource-column">
-                <h3>Business Management + Administration</h3>
-                <ul class="resource-list">
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_bma.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/22_state_bma.pdf" target="_blank" class="resource-link">2024 States</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/23_icdc_bma.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
-                </ul>
-                
-                <h3>Hospitality + Tourism</h3>
-                <ul class="resource-list">
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_hsp.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_state_hsp.pdf" target="_blank" class="resource-link">2024 States</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/23_icdc_hsp.pdf" target="_blank" class="resource-link">2023 ICDC</a></li>
-                </ul>
-                
-                <h3>Entrepreneurship</h3>
-                <ul class="resource-list">
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_ent.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/21_state_ent.pdf" target="_blank" class="resource-link">2021 States</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc_ent.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
-                </ul>
-                
-                <h3>Personal Financial Literacy</h3>
-                <ul class="resource-list">
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_pfl.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_state_pfl.pdf" target="_blank" class="resource-link">2024 States</a></li>
-                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc_pfl.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
-                </ul>
+            <!-- How to Find Roleplays Accordion -->
+            <button class="accordion">How to Find Roleplays</button>
+            <div class="panel">
+                <div class="panel-content">
+                    <ol class="instructions-list">
+                        <li>Find your event DECA page</li>
+                        <li>Use the sample roleplay</li>
+                        <li>Or scroll down to view all resources</li>
+                        <li>Select career cluster and type as roleplay (this will give you all roleplays from past years)</li>
+                    </ol>
+                    <p class="sidenote"><strong>Sidenote:</strong> This can be done to get more exams as well</p>
+                </div>
             </div>
         </div>
     </div>
-    
-    <!-- How to Find Roleplays Accordion -->
-    <button class="accordion">How to Find Roleplays</button>
-    <div class="panel">
-        <ol class="instructions-list">
-            <li>Find your event DECA page</li>
-            <li>Use the sample roleplay</li>
-            <li>Or scroll down to view all resources</li>
-            <li>Select career cluster and type as roleplay (this will give you all roleplays from past years)</li>
-        </ol>
-        <p class="sidenote"><strong>Sidenote:</strong> This can be done to get more exams as well</p>
-    </div>
-</div>
     <!-- Resources Written Page -->
     <div class="resources-page" id="resourcesWrittenPage">
         <div class="resources-content">
@@ -1348,6 +1368,20 @@
             <p>This is where the written example document would be displayed.</p>
         </div>
     </div>
+    <!-- Password Form Page -->
+    <div class="password-form-page" id="passwordFormPage">
+        <div class="password-form-container">
+            <h2>Enter Password to Edit Calendar</h2>
+            <div class="form-group-password">
+                <label for="passwordInput">Password:</label>
+                <input type="password" id="passwordInput" placeholder="Enter password">
+            </div>
+            <div class="password-buttons">
+                <button class="password-button nav-button-style" id="submitPassword">Submit</button>
+                <button class="password-button" id="cancelPassword">Cancel</button>
+            </div>
+        </div>
+    </div>
     <!-- Back Button -->
     <button class="back-button" id="backButton">Back</button>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
@@ -1358,20 +1392,19 @@
             let pageHistory = [];
             
             // Initialize FullCalendar
-            // Calendar functionality
             var calendarEl = document.getElementById('calendar');
             if (calendarEl) {
                 // Define events data
                 const eventsData = [
                     {
-                        title: 'INTRESTING MEETING FOR ALL LUNCHES',
+                        title: 'INTRESTING MEETING FOR ALL LUNCHES IN AUDITORIUM',
                         start: '2024-09-03',
                         description: 'Auditorium',
                         backgroundColor: '#4dabf7',
                         borderColor: '#4dabf7'
                     },
                     {
-                        title: 'PatTime Intrest Meeting',
+                        title: 'PatTime Intrest Meeting in the Auditorium',
                         start: '2024-09-10',
                         description: 'Auditorium',
                         backgroundColor: '#51cf66',
@@ -1383,17 +1416,8 @@
                         description: '',
                         backgroundColor: '#fcc419',
                         borderColor: '#fcc419'
-                    },
-                    {
-                        title: 'States',
-                        start: '2026-02-26',
-                        end: '2026-02-28',
-                        description: '',
-                        backgroundColor: '#cc5de8',
-                        borderColor: '#cc5de8'
                     }
                 ];
-            
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'dayGridMonth',
                     headerToolbar: {
@@ -1407,114 +1431,6 @@
                     }
                 });
                 calendar.render();
-            }
-                
-                // Event form handling
-                const eventForm = document.getElementById('event-form');
-                const overlay = document.getElementById('overlay');
-                const closeFormBtn = document.getElementById('close-form');
-                const cancelEventBtn = document.getElementById('cancel-event');
-                const deleteEventBtn = document.getElementById('delete-event');
-                const eventFormContent = document.getElementById('event-form-content');
-                const formTitle = document.getElementById('form-title');
-                let editingEvent = null;
-                
-                function openEventForm(date = null, event = null) {
-                    eventForm.classList.add('active');
-                    overlay.classList.add('active');
-                    // Reset form
-                    document.getElementById('event-form-content').reset();
-                    deleteEventBtn.style.display = 'none';
-                    formTitle.textContent = 'Add New Event';
-                    editingEvent = null;
-                    // Set date if provided
-                    if (date) {
-                        document.getElementById('event-date').value = date;
-                    } else {
-                        // Set to today's date by default
-                        const today = new Date();
-                        const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-                        document.getElementById('event-date').value = formattedDate;
-                    }
-                    // If editing an event
-                    if (event) {
-                        editingEvent = event;
-                        formTitle.textContent = 'Edit Event';
-                        deleteEventBtn.style.display = 'block';
-                        document.getElementById('event-id').value = event.id;
-                        document.getElementById('event-title').value = event.title;
-                        document.getElementById('event-date').value = event.start.toISOString().split('T')[0];
-                        document.getElementById('event-time').value = event.start.toTimeString().substring(0, 5);
-                        document.getElementById('event-description').value = event.description || '';
-                        document.getElementById('event-color').value = event.backgroundColor;
-                    }
-                }
-                
-                function closeEventForm() {
-                    eventForm.classList.remove('active');
-                    overlay.classList.remove('active');
-                    editingEvent = null;
-                }
-                
-                closeFormBtn.addEventListener('click', closeEventForm);
-                cancelEventBtn.addEventListener('click', closeEventForm);
-                overlay.addEventListener('click', closeEventForm);
-                
-                // Handle form submission
-                eventFormContent.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const title = document.getElementById('event-title').value;
-                    const dateStr = document.getElementById('event-date').value;
-                    const time = document.getElementById('event-time').value;
-                    const description = document.getElementById('event-description').value;
-                    const color = document.getElementById('event-color').value;
-                    
-                    if (title && dateStr) {
-                        const date = new Date(dateStr + (time ? 'T' + time : 'T00:00'));
-                        if (editingEvent) {
-                            // Update existing event
-                            const eventIndex = eventsData.findIndex(e => e.id === editingEvent.id);
-                            if (eventIndex !== -1) {
-                                eventsData[eventIndex] = {
-                                    id: editingEvent.id,
-                                    title: title,
-                                    start: date,
-                                    backgroundColor: color,
-                                    borderColor: color,
-                                    description: description
-                                };
-                            }
-                        } else {
-                            // Add new event
-                            const newEvent = {
-                                id: eventsData.length > 0 ? Math.max(...eventsData.map(e => e.id)) + 1 : 1,
-                                title: title,
-                                start: date,
-                                backgroundColor: color,
-                                borderColor: color,
-                                description: description
-                            };
-                            eventsData.push(newEvent);
-                        }
-                        // Refresh calendar
-                        calendar.removeAllEvents();
-                        calendar.addEventSource(eventsData);
-                        closeEventForm();
-                    }
-                });
-                
-                // Handle deleting events
-                deleteEventBtn.addEventListener('click', function() {
-                    if (editingEvent) {
-                        if (confirm('Are you sure you want to delete this event?')) {
-                            eventsData = eventsData.filter(e => e.id !== editingEvent.id);
-                            // Refresh calendar
-                            calendar.removeAllEvents();
-                            calendar.addEventSource(eventsData);
-                            closeEventForm();
-                        }
-                    }
-                });
             }
             
             // Logo click to go back to home
@@ -1557,14 +1473,12 @@
                 showBackButton();
                 pageHistory.push('eventsPage');
             });
-            
             document.getElementById('writtenButton').addEventListener('click', function() {
                 hideAllPages();
                 showWrittenEventsPage();
                 showBackButton();
                 pageHistory.push('eventsPage');
             });
-            
             document.getElementById('otherButton').addEventListener('click', function() {
                 hideAllPages();
                 showOtherEventsPage();
@@ -1582,7 +1496,6 @@
                     });
                 });
             }
-            
             const downText = document.getElementById('downText');
             if (downText) {
                 downText.addEventListener('click', function() {
@@ -1631,7 +1544,6 @@
                     alert('Incorrect password. Please try again.');
                 }
             });
-            
             document.getElementById('cancelPassword').addEventListener('click', function() {
                 document.getElementById('passwordFormPage').classList.remove('active');
                 document.getElementById('eventsCalendarPage').classList.add('active');
@@ -1645,7 +1557,6 @@
                 showBackButton();
                 pageHistory.push('notDecaMemberPage');
             });
-            
             document.getElementById('okayButton').addEventListener('click', function() {
                 hideAllPages();
                 document.getElementById('quizPage').classList.add('active');
@@ -1657,7 +1568,6 @@
             // Quiz functionality
             const quizContent = document.getElementById('quizContent');
             let currentQuestion = 'event';
-            
             function showDecaQuestion() {
                 quizContent.innerHTML = `
                     <h1>Are You A Part of Deca?</h1>
@@ -1676,7 +1586,6 @@
                     pageHistory.push('quizPage');
                 });
             }
-            
             function showQuestion(questionType) {
                 currentQuestion = questionType;
                 quizContent.innerHTML = '';
@@ -1692,6 +1601,7 @@
                         document.getElementById('yesButton').addEventListener('click', function() {
                             document.getElementById('quizPage').classList.remove('active');
                             document.getElementById('eventsPage').classList.add('active');
+                            showBackButton();
                             pageHistory.push('quizPage');
                         });
                         document.getElementById('noButton').addEventListener('click', function() {
@@ -1801,13 +1711,11 @@
                         break;
                 }
             }
-            
             function showResult(pageId) {
                 hideAllPages();
                 document.getElementById(pageId).classList.add('active');
                 showBackButton();
             }
-            
             function hideAllPages() {
                 // Include resources pages in the selector
                 const pages = document.querySelectorAll('.content-page, .quiz-page, .events-page, .resources-page, #eventsCalendarPage, #passwordFormPage, #homeSection, .about, .contact');
@@ -1819,7 +1727,6 @@
                 });
                 document.getElementById('backButton').style.display = 'none';
             }
-            
             function showHomePage() {
                 hideAllPages();
                 document.getElementById('homeSection').style.display = 'flex';
@@ -1828,11 +1735,9 @@
                 document.getElementById('backButton').style.display = 'none';
                 pageHistory = [];
             }
-            
             function showBackButton() {
                 document.getElementById('backButton').style.display = 'block';
             }
-            
             function goBack() {
                 if (pageHistory.length > 0) {
                     const previousPageId = pageHistory.pop();
@@ -1857,7 +1762,6 @@
                     showHomePage();
                 }
             }
-            
             // Show sub buttons based on category
             window.showSubButtons = function(category) {
                 hideAllPages();
@@ -1880,11 +1784,9 @@
                 eventsContent.innerHTML = buttonsHTML;
                 pageHistory.push('home');
             }
-            
             window.showWrittenSubButtons = function(category) {
                 showSubButtons(category);
             }
-            
             window.showRoleplayEvents = function() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
@@ -1898,7 +1800,6 @@
                 `;
                 pageHistory.push('eventsPage');
             }
-            
             window.showWrittenEvents = function() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
@@ -1912,7 +1813,6 @@
                 `;
                 pageHistory.push('eventsPage');
             }
-            
             // Direct navigation functions from top bar dropdowns
             window.showRoleplayExample = function() {
                 hideAllPages();
@@ -1920,7 +1820,6 @@
                 showBackButton();
                 pageHistory.push('home');
             }
-            
             window.showWrittenExample = function() {
                 hideAllPages();
                 document.getElementById('writtenExamplePage').classList.add('active');
@@ -1939,7 +1838,6 @@
                     });
                 }, 100);
             }
-            
             // Resources pages - Direct navigation from top bar dropdowns
             window.showResourcesRoleplayPage = function() {
                 hideAllPages();
@@ -1947,21 +1845,18 @@
                 showBackButton();
                 pageHistory.push('home');
             }
-            
             window.showResourcesWrittenPage = function() {
                 hideAllPages();
                 document.getElementById('resourcesWrittenPage').classList.add('active');
                 showBackButton();
                 pageHistory.push('home');
             }
-            
             window.showVirtualBusinessChallenges = function() {
                 hideAllPages();
                 document.getElementById('virtualBusinessPage').classList.add('active');
                 showBackButton();
                 pageHistory.push('home');
             }
-            
             // Events calendar
             window.showEventsCalendar = function() {
                 hideAllPages();
@@ -1969,7 +1864,6 @@
                 showBackButton();
                 pageHistory.push('home');
             }
-            
             // Password form
             window.showPasswordForm = function() {
                 hideAllPages();
@@ -1977,7 +1871,6 @@
                 showBackButton();
                 pageHistory.push('home');
             }
-            
             // Function to show a specific page
             window.showPage = function(pageId) {
                 hideAllPages();
@@ -1985,7 +1878,6 @@
                 showBackButton();
                 pageHistory.push('eventsPage');
             }
-            
             // Show events pages from Events Page buttons
             function showRoleplayEventsPage() {
                 const eventsContent = document.querySelector('.events-content');
@@ -1999,7 +1891,6 @@
                     </div>
                 `;
             }
-            
             function showWrittenEventsPage() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
@@ -2012,7 +1903,6 @@
                     </div>
                 `;
             }
-            
             function showOtherEventsPage() {
                 const eventsContent = document.querySelector('.events-content');
                 eventsContent.innerHTML = `
@@ -2023,10 +1913,8 @@
                     </div>
                 `;
             }
-            
             // Initialize by showing home sections
             showHomePage();
-            
             // Direct navigation functions
             window.showWrittenExampleDirect = function() {
                 hideAllPages();
@@ -2048,14 +1936,12 @@
                     writtenExamplePage.addEventListener('scroll', newListener);
                 }, 100);
             };
-            
             window.showResourcesWrittenPage = function() {
                 hideAllPages();
                 document.getElementById('resourcesWrittenPage').classList.add('active');
                 showBackButton();
                 pageHistory.push('home');
             };
-            
             window.showVirtualBusinessChallengesDirect = function() {
                 hideAllPages();
                 document.getElementById('virtualBusinessPage').classList.add('active');
