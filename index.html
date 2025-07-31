@@ -295,7 +295,7 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
         .copy-link {
-            background: #0275E0;
+            background: #764ba2;
             cursor: pointer;
         }
         /* Quiz Page */
@@ -957,13 +957,21 @@
             background: #0072c6; /* Outlook blue */
         }
         .remind-logo {
-            background: #0275E0; /* Changed to #0275E0 */
+            background: #4682B4; /* Steel blue background */
             padding: 5px;
         }
         .remind-logo img {
             width: 70px;
             height: 70px;
             object-fit: contain;
+        }
+        
+        /* Calendar Fix */
+        #calendar {
+            max-width: 900px;
+            min-height: 600px;
+            margin: auto;
+            background-color: white;
         }
     </style>
 </head>
@@ -1393,40 +1401,41 @@
             // Initialize FullCalendar
             var calendarEl = document.getElementById('calendar');
             if (calendarEl) {
-                // Define events data
-                const eventsData = [
-                    {
-                        title: 'Interest Meeting (All Lunches)',
-                        start: '2025-09-03'
-                    },
-                    {
-                        title: 'Pattime Interest Meeting (Auditorium)',
-                        start: '2025-09-10'
-                    },
-                    {
-                        title: 'Districts',
-                        start: '2025-12-01'
-                    },
-                    {
-                        title: 'States',
-                        start: '2026-02-26',
-                        end: '2026-03-01'
-                    }
-                ];
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'dayGridMonth',
-                    headerToolbar: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                    },
-                    events: eventsData,
+                    initialDate: '2025-09-01', // Start on September 2025
+                    height: 'auto',
+                    events: [
+                        {
+                            title: 'Interest Meeting (All Lunches)',
+                            start: '2025-09-03'
+                        },
+                        {
+                            title: 'Pattime Interest Meeting (Auditorium)',
+                            start: '2025-09-10'
+                        },
+                        {
+                            title: 'Districts',
+                            start: '2025-12-01'
+                        },
+                        {
+                            title: 'States',
+                            start: '2026-02-26',
+                            end: '2026-03-01',
+                            display: 'block'
+                        }
+                    ],
                     eventClick: function(info) {
                         alert(info.event.title + '\n' + info.event.extendedProps.description);
-                    },
-                    initialDate: new Date() // Start on current date
+                    }
                 });
                 calendar.render();
+                
+                // 🛠 Fix render issues due to layout not being ready
+                setTimeout(() => {
+                  window.dispatchEvent(new Event('resize'));
+                  calendar.updateSize();
+                }, 100);
             }
             // Logo click to go back to home
             document.getElementById('logo').addEventListener('click', function() {
@@ -1507,6 +1516,19 @@
                     });
                 });
             }
+                        #logo2 {
+              display: inline-block;
+              border: 2px solid #0275E0;
+              border-radius: 8px;
+              padding: 4px;
+              transition: all 0.3s ease;
+            }
+            
+            #logo2:hover {
+              background-color: rgba(2, 117, 224, 0.1);
+              box-shadow: 0 0 8px #0275E0;
+            }
+
             // Back button functionality
             document.getElementById('backButton').addEventListener('click', function() {
                 goBack();
