@@ -507,11 +507,11 @@
         /* Calendar */
         #eventsCalendarPage {
             position: fixed;
-            top: 70px;
+            top: 70px; /* Start below the navbar */
             left: 0;
             width: 100%;
             height: calc(100vh - 70px);
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Blue gradient background */
             color: white;
             display: none;
             flex-direction: column;
@@ -524,7 +524,7 @@
         }
         .calendar-container {
             width: 100%;
-            background: rgba(0, 30, 60, 0.7);
+            background: rgba(0, 30, 60, 0.7); /* Blue-themed background */
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
@@ -534,18 +534,18 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px); /* Glass effect */
         }
         #calendar {
             flex-grow: 1;
             overflow-y: auto;
-            background: rgba(0, 40, 80, 0.4);
+            background: rgba(0, 40, 80, 0.4); /* Inner calendar background */
             border-radius: 5px;
             padding: 10px;
         }
         .fc .fc-toolbar-title {
             font-size: 1.2rem;
-            color: #a3d5ff;
+            color: #a3d5ff; /* Blue-themed text */
         }
         .fc .fc-button {
             padding: 4px 8px;
@@ -564,12 +564,12 @@
             color: rgba(255, 255, 255, 0.5);
         }
         .fc .fc-button-primary:not(:disabled) {
-            background: #4dabf7;
+            background: #4dabf7; /* Blue button */
             border: none;
             color: #001e3c;
         }
         .fc .fc-button-primary:not(:disabled):hover {
-            background: #74c0fc;
+            background: #74c0fc; /* Lighter blue on hover */
         }
         .fc .fc-daygrid-day-number {
             color: #fff;
@@ -579,7 +579,7 @@
             font-weight: bold;
         }
         .fc .fc-daygrid-event {
-            background: rgba(77, 171, 247, 0.7);
+            background: rgba(77, 171, 247, 0.7); /* Default event color */
             border: none;
             padding: 2px 4px;
             border-radius: 3px;
@@ -605,6 +605,33 @@
             .fc .fc-toolbar-chunk {
                 margin-bottom: 5px;
             }
+        }
+        .slides-section {
+            width: 100%;
+            margin-top: 10px;
+            flex-shrink: 0;
+            background: rgba(0, 20, 40, 0.6); /* Blue-themed background */
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid rgba(100, 180, 255, 0.2);
+        }
+        .slides-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #a3d5ff; /* Blue-themed text */
+            text-align: center;
+        }
+        .slides-box {
+            padding: 15px;
+            min-height: 100px;
+            background: rgba(0, 40, 80, 0.4); /* Inner box background */
+            border-radius: 5px;
+            border: 1px dashed #4dabf7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a3d5ff;
+            font-style: italic;
         }
         .slides-section {
             width: 100%;
@@ -1051,62 +1078,6 @@
             </div>
         </div>
     </div>
-    <!-- Password Form Page -->
-    <div class="password-form-page" id="passwordFormPage">
-        <div class="password-form-container">
-            <h2>Enter Password to Edit Calendar</h2>
-            <div class="form-group-password">
-                <label for="passwordInput">Password:</label>
-                <input type="password" id="passwordInput" placeholder="Enter password">
-            </div>
-            <div class="password-buttons">
-                <button class="password-button" id="submitPassword">Submit</button>
-                <button class="password-button" id="cancelPassword">Cancel</button>
-            </div>
-        </div>
-    </div>
-    <!-- Event Form Modal -->
-    <div class="overlay" id="overlay"></div>
-    <div class="event-form" id="event-form">
-        <div class="form-header">
-            <h2 id="form-title">Add New Event</h2>
-            <button class="close-btn" id="close-form"><i class="fas fa-times"></i></button>
-        </div>
-        <form id="event-form-content">
-            <input type="hidden" id="event-id">
-            <div class="form-group">
-                <label for="event-title">Event Title</label>
-                <input type="text" id="event-title" placeholder="Enter event title" required>
-            </div>
-            <div class="form-group">
-                <label for="event-date">Date</label>
-                <input type="date" id="event-date" required>
-            </div>
-            <div class="form-group">
-                <label for="event-time">Time</label>
-                <input type="time" id="event-time">
-            </div>
-            <div class="form-group">
-                <label for="event-description">Description</label>
-                <textarea id="event-description" placeholder="Enter event description"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="event-color">Event Color</label>
-                <select id="event-color">
-                    <option value="#4dabf7">Blue</option>
-                    <option value="#ff6b6b">Red</option>
-                    <option value="#51cf66">Green</option>
-                    <option value="#fcc419">Yellow</option>
-                    <option value="#cc5de8">Purple</option>
-                </select>
-            </div>
-            <div class="form-actions">
-                <button type="button" class="btn btn-secondary" id="cancel-event">Cancel</button>
-                <button type="button" class="btn btn-danger" id="delete-event" style="display: none;">Delete Event</button>
-                <button type="submit" class="btn btn-primary" id="save-event">Save Event</button>
-            </div>
-        </form>
-    </div>
     <!-- Not DECA Member Page -->
     <div class="content-page" id="notDecaMemberPage">
         <div class="form-container">
@@ -1127,31 +1098,80 @@
         </div>
     </div>
     <!-- Resources Roleplay Page -->
-    <div class="resources-page" id="resourcesRoleplayPage">
-        <div class="resources-content">
-            <h1>Resources - Role Play</h1>
-            <div class="resources-columns">
-                <div class="resource-column">
-                    <h2>Writing</h2>
-                    <ul class="resource-list">
-                        <li><a href="#" class="resource-link">Business Writing Guide</a></li>
-                        <li><a href="#" class="resource-link">Report Structures</a></li>
-                        <li><a href="#" class="resource-link">Grammar & Style</a></li>
-                        <li><a href="#" class="resource-link">Sample Reports</a></li>
-                    </ul>
-                </div>
-                <div class="resource-column">
-                    <h2>Presentation</h2>
-                    <ul class="resource-list">
-                        <li><a href="#" class="resource-link">Presentation Tips</a></li>
-                        <li><a href="#" class="resource-link">Slide Design</a></li>
-                        <li><a href="#" class="resource-link">Delivery Skills</a></li>
-                        <li><a href="#" class="resource-link">Practice Presentations</a></li>
-                    </ul>
-                </div>
+   <div class="resources-content">
+    <h1>Resources - Role Play</h1>
+    
+    <!-- Exam Prep Accordion -->
+    <button class="accordion">Exam Prep</button>
+    <div class="panel">
+        <div class="resources-columns">
+            <div class="resource-column">
+                <h3>Business Administration CORE</h3>
+                <ul class="resource-list">
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/23_sample_bacore.pdf" target="_blank" class="resource-link">2023 Sample</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/2024_states_bacore.pdf" target="_blank" class="resource-link">2024 States</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
+                </ul>
+                
+                <h3>Marketing</h3>
+                <ul class="resource-list">
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_mkt.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_state_mkt.pdf" target="_blank" class="resource-link">2024 States</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc_mkt.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
+                </ul>
+                
+                <h3>Finance</h3>
+                <ul class="resource-list">
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_fin.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/23_state_fin.pdf" target="_blank" class="resource-link">2023 States</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc_fin.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
+                </ul>
+            </div>
+            
+            <div class="resource-column">
+                <h3>Business Management + Administration</h3>
+                <ul class="resource-list">
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_bma.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/22_state_bma.pdf" target="_blank" class="resource-link">2024 States</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/23_icdc_bma.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
+                </ul>
+                
+                <h3>Hospitality + Tourism</h3>
+                <ul class="resource-list">
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_hsp.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_state_hsp.pdf" target="_blank" class="resource-link">2024 States</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/23_icdc_hsp.pdf" target="_blank" class="resource-link">2023 ICDC</a></li>
+                </ul>
+                
+                <h3>Entrepreneurship</h3>
+                <ul class="resource-list">
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_ent.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/21_state_ent.pdf" target="_blank" class="resource-link">2021 States</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc_ent.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
+                </ul>
+                
+                <h3>Personal Financial Literacy</h3>
+                <ul class="resource-list">
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_sample_pfl.pdf" target="_blank" class="resource-link">2024 Sample</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_state_pfl.pdf" target="_blank" class="resource-link">2024 States</a></li>
+                    <li><a href="https://enloehsdeca.weebly.com/uploads/1/5/0/3/150387010/24_icdc_pfl.pdf" target="_blank" class="resource-link">2024 ICDC</a></li>
+                </ul>
             </div>
         </div>
     </div>
+    
+    <!-- How to Find Roleplays Accordion -->
+    <button class="accordion">How to Find Roleplays</button>
+    <div class="panel">
+        <ol class="instructions-list">
+            <li>Find your event DECA page</li>
+            <li>Use the sample roleplay</li>
+            <li>Or scroll down to view all resources</li>
+            <li>Select career cluster and type as roleplay (this will give you all roleplays from past years)</li>
+        </ol>
+        <p class="sidenote"><strong>Sidenote:</strong> This can be done to get more exams as well</p>
+    </div>
+</div>
     <!-- Resources Written Page -->
     <div class="resources-page" id="resourcesWrittenPage">
         <div class="resources-content">
@@ -1338,16 +1358,42 @@
             let pageHistory = [];
             
             // Initialize FullCalendar
+            // Calendar functionality
             var calendarEl = document.getElementById('calendar');
             if (calendarEl) {
-                // Store events in memory
-                let eventsData = [
-                    { id: 1, title: "DECA Meeting", start: new Date(), backgroundColor: "#4dabf7", borderColor: "#4dabf7", description: "Weekly DECA meeting" },
-                    { id: 2, title: "Workshop", start: new Date(new Date().setDate(new Date().getDate() + 3)), backgroundColor: "#51cf66", borderColor: "#51cf66", description: "Leadership workshop" },
-                    { id: 3, title: "Competition", start: new Date(new Date().setDate(new Date().getDate() + 10)), backgroundColor: "#ff6b6b", borderColor: "#ff6b6b", description: "Regional competition" },
-                    { id: 4, title: "Deadline", start: new Date(new Date().setDate(new Date().getDate() + 17)), backgroundColor: "#fcc419", borderColor: "#fcc419", description: "Project submissions due" }
+                // Define events data
+                const eventsData = [
+                    {
+                        title: 'INTRESTING MEETING FOR ALL LUNCHES',
+                        start: '2024-09-03',
+                        description: 'Auditorium',
+                        backgroundColor: '#4dabf7',
+                        borderColor: '#4dabf7'
+                    },
+                    {
+                        title: 'PatTime Intrest Meeting',
+                        start: '2024-09-10',
+                        description: 'Auditorium',
+                        backgroundColor: '#51cf66',
+                        borderColor: '#51cf66'
+                    },
+                    {
+                        title: 'Districts',
+                        start: '2024-12-01',
+                        description: '',
+                        backgroundColor: '#fcc419',
+                        borderColor: '#fcc419'
+                    },
+                    {
+                        title: 'States',
+                        start: '2026-02-26',
+                        end: '2026-02-28',
+                        description: '',
+                        backgroundColor: '#cc5de8',
+                        borderColor: '#cc5de8'
+                    }
                 ];
-                
+            
                 var calendar = new FullCalendar.Calendar(calendarEl, {
                     initialView: 'dayGridMonth',
                     headerToolbar: {
@@ -1356,17 +1402,12 @@
                         right: 'dayGridMonth,timeGridWeek,timeGridDay'
                     },
                     events: eventsData,
-                    dateClick: function(info) {
-                        openEventForm(info.dateStr);
-                    },
                     eventClick: function(info) {
-                        const event = eventsData.find(e => e.id == info.event.id);
-                        if (event) {
-                            openEventForm(null, event);
-                        }
+                        alert(info.event.title + '\n' + info.event.extendedProps.description);
                     }
                 });
                 calendar.render();
+            }
                 
                 // Event form handling
                 const eventForm = document.getElementById('event-form');
@@ -1830,24 +1871,10 @@
                 let buttonsHTML = '';
                 switch(category) {
                     case 'roleplay':
-                        buttonsHTML = `
-                            <h1>RolePlay</h1>
-                            <div class="events-buttons">
-                                <button class="event-button" onclick="showRoleplayEvents()">What?</button>
-                                <button class="event-button" onclick="showRoleplayExample()">Example</button>
-                                <button class="event-button" onclick="showResourcesRoleplayPage()">Resources</button>
-                            </div>
-                        `;
+                       buttonsHTML = `<h1>RolePlay</h1><div class="events-buttons"><button class="event-button" onclick="showRoleplayEvents()">What?</button><button class="event-button" onclick="showRoleplayExample()">Example</button><button class="event-button" onclick="showResourcesRoleplayPage()">Resources</button></div>`;
                         break;
                     case 'written':
-                        buttonsHTML = `
-                            <h1>Written</h1>
-                            <div class="events-buttons">
-                                <button class="event-button" onclick="showWrittenEvents()">What?</button>
-                                <button class="event-button" onclick="showWrittenExample()">Example</button>
-                                <button class="event-button" onclick="showResourcesWrittenPage()">Resources</button>
-                            </div>
-                        `;
+                       buttonsHTML = `<h1>Written</h1><div class="events-buttons"><button class="event-button" onclick="showWrittenEvents()">What?</button><button class="event-button" onclick="showWrittenExample()">Example</button><button class="event-button" onclick="showResourcesWrittenPage()">Resources</button></div>`;
                         break;
                 }
                 eventsContent.innerHTML = buttonsHTML;
